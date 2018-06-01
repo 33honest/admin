@@ -84,7 +84,8 @@ public class BinaryUploader {
 
 			if (storageState.isSuccess()) {
 				String url =  PathFormat.format(savePath);
-				url = "/"+projectPath+url;
+				//url = "/"+projectPath+url;
+				url = projectPath+url;
 				storageState.putInfo("url", url);
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
