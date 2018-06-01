@@ -1,8 +1,5 @@
 package cn.ccrm.admin.web;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +16,12 @@ public class GoodsController {
 	public String index(ModelMap model) {
 		
 		return CommonConst.VIEWPREFIX_NAME + "goods/index";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit(ModelMap model) {
+		
+		return CommonConst.VIEWPREFIX_NAME + "goods/edit";
 	}
 	
 }
