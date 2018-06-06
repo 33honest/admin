@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ccrm.admin.dao.OrderJoinMapper" >
+  <resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.OrderJoin" >
+    <id column="join_order_id" property="joinOrderId" jdbcType="INTEGER" />
+    <result column="join_order_number" property="joinOrderNumber" jdbcType="VARCHAR" />
+    <result column="order_ids" property="orderIds" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.ccrm.admin.entity.OrderJoin" extends="BaseResultMap" >
+    <result column="order_numbers" property="orderNumbers" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    join_order_id, join_order_number, order_ids, total_price
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_numbers
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_order_join
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_order_join
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ccrm.admin.entity.OrderJoin" >
+    insert into sys_order_join (join_order_id, join_order_number, order_ids, 
+      total_price, order_numbers)
+    values (#{joinOrderId,jdbcType=INTEGER}, #{joinOrderNumber,jdbcType=VARCHAR}, #{orderIds,jdbcType=VARCHAR}, 
+      #{totalPrice,jdbcType=INTEGER}, #{orderNumbers,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ccrm.admin.entity.OrderJoin" >
+    insert into sys_order_join
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="joinOrderId != null" >
+        join_order_id,
+      </if>
+      <if test="joinOrderNumber != null" >
+        join_order_number,
+      </if>
+      <if test="orderIds != null" >
+        order_ids,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="orderNumbers != null" >
+        order_numbers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="joinOrderId != null" >
+        #{joinOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="joinOrderNumber != null" >
+        #{joinOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIds != null" >
+        #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumbers != null" >
+        #{orderNumbers,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.OrderJoin" >
+    update sys_order_join
+    <set >
+      <if test="joinOrderNumber != null" >
+        join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIds != null" >
+        order_ids = #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumbers != null" >
+        order_numbers = #{orderNumbers,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ccrm.admin.entity.OrderJoin" >
+    update sys_order_join
+    set join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{orderIds,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER},
+      order_numbers = #{orderNumbers,jdbcType=LONGVARCHAR}
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.OrderJoin" >
+    update sys_order_join
+    set join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{orderIds,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER}
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+</mapper>

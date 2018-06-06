@@ -31,7 +31,6 @@ canvas {
 		createCode();
 		//测试提交，对接程序删除即可
 		$(".submit_btn").click(function() {
-			location.href = "/login/login";
 		});
 	});
 </script>
@@ -41,24 +40,28 @@ canvas {
 		<dt>
 			<strong>站点后台管理系统</strong> <em>Management System</em>
 		</dt>
-		<dd class="user_icon">
-			<input type="text" placeholder="账号" name="username" class="login_txtbx" />
-		</dd>
-		<dd class="pwd_icon">
-			<input type="password" placeholder="密码" name="password" class="login_txtbx" />
-		</dd>
-		<dd class="val_icon">
-			<div class="checkcode">
-				<input type="text" id="J_codetext" name="authcode" placeholder="验证码" maxlength="4"
-					class="login_txtbx">
-				<canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-			</div>
-			<input type="button" value="验证码核验" class="ver_btn"
-				onClick="validate();">
-		</dd>
-		<dd>
-			<input type="button" value="立即登陆" class="submit_btn" />
-		</dd>
+		<form name="loginForm" id="loginForm" method="POST" action="#" >
+			<dd class="user_icon">
+				<input type="text" placeholder="账号" name="username"
+					class="login_txtbx" />
+			</dd>
+			<dd class="pwd_icon">
+				<input type="password" placeholder="密码" name="password"
+					class="login_txtbx" />
+			</dd>
+			<dd class="val_icon">
+				<div class="checkcode">
+					<input type="text" id="J_codetext" name="authcode"
+						placeholder="验证码" maxlength="4" class="login_txtbx">
+					<canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+				</div>
+				<input type="button" value="验证码核验" class="ver_btn"
+					onClick="validate();">
+			</dd>
+			<dd>
+				<input type="submit" value="立即登陆" class="submit_btn" />
+			</dd>
+		</form>
 		<dd>
 			<p>© 2015-2018 DeathGhost 版权所有</p>
 			<p></p>

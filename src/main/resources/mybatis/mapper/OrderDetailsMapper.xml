@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ccrm.admin.dao.OrderDetailsMapper" >
+  <resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.OrderDetails" >
+    <id column="order_details_id" property="orderDetailsId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="price_id" property="priceId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="details_amount" property="detailsAmount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_details_id, order_id, order_number, price_id, goods_id, unit_name, goods_name, 
+    unit_price, num, details_amount, create_time, image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_order_details
+    where order_details_id = #{orderDetailsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_order_details
+    where order_details_id = #{orderDetailsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ccrm.admin.entity.OrderDetails" >
+    insert into sys_order_details (order_details_id, order_id, order_number, 
+      price_id, goods_id, unit_name, 
+      goods_name, unit_price, num, 
+      details_amount, create_time, image
+      )
+    values (#{orderDetailsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, 
+      #{priceId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{unitPrice,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{detailsAmount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{image,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ccrm.admin.entity.OrderDetails" >
+    insert into sys_order_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderDetailsId != null" >
+        order_details_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="priceId != null" >
+        price_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="unitName != null" >
+        unit_name,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="detailsAmount != null" >
+        details_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderDetailsId != null" >
+        #{orderDetailsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="priceId != null" >
+        #{priceId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null" >
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="detailsAmount != null" >
+        #{detailsAmount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.OrderDetails" >
+    update sys_order_details
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="priceId != null" >
+        price_id = #{priceId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null" >
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="detailsAmount != null" >
+        details_amount = #{detailsAmount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_details_id = #{orderDetailsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.OrderDetails" >
+    update sys_order_details
+    set order_id = #{orderId,jdbcType=INTEGER},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      price_id = #{priceId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      details_amount = #{detailsAmount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      image = #{image,jdbcType=VARCHAR}
+    where order_details_id = #{orderDetailsId,jdbcType=INTEGER}
+  </update>
+</mapper>
