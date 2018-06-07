@@ -1,0 +1,48 @@
+<#include "common/head.html">
+<div class="container clearfix">
+    <#include "common/menu.html">
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="index.html" color="#white">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span></div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                    <div class="result-list">
+                    	<a href="/goods/edit"><i class="icon-font"></i>删除分类</a>
+                        <a href="/category/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th class="tc" width="5%"></th>
+                            <th>标签ID</th>
+                            <th>菜单名称</th>
+                            <th>菜单地址</th>
+                            <th>菜单排序</th>
+                            <th>菜单操作</th>
+                        </tr>
+                        <#list menus as menu>
+                        <tr>
+                            <td class="tc"><input name="id[]" value="" type="checkbox"></td>
+                            <td>${menu.MENU_ID}</td>
+                            <td>${menu.MENU_NAME}</td>
+                            <td>${menu.MENU_URL}</td>
+                            <td>${menu.MENU_ORDER}</td>
+                            <td><a href="" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span></td>
+                        </tr>
+                        </#list>
+                    </table>
+                    <div class="list-page"> 2 条 1/1 页</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+</body>
+</html>

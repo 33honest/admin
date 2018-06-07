@@ -1,0 +1,70 @@
+<#include "common/head.html">
+<div class="container clearfix">
+	<#include "common/menu.html">
+	<div class="main-wrap">
+
+		<div class="crumb-wrap">
+			<div class="crumb-list">
+				<i class="icon-font"></i><a href="index.html" color="#white">首页</a><span
+					class="crumb-step">&gt;</span><span class="crumb-name">添加产品</span>
+			</div>
+		</div>
+
+		<!-- begin -->
+		<div class="result-wrap">
+			<div class="result-content">
+				<form action="/category/save" method="post" id="myform" name="myform"
+					enctype="multipart/form-data">
+					<table class="insert-tab" width="100%">
+						<tbody>
+							<tr>
+								<th width="120"><i class="require-red">*</i>产品类型：</th>
+								<td><select name="parent_id" id="parent_id" class="required">
+										<option value="0">请选择</option>
+										<#list menus as menu>
+										<option value="${menu.MENU_ID}">${menu.MENU_NAME}</option>
+										</#list>
+								</select></td>
+							</tr>
+							<tr>
+								<th><i class="require-red">*</i>菜单名称：</th>
+								<td>
+								<input class="common-text required" id="menu_name"
+									name="menu_name" size="50" value="" type="text"></td>
+							</tr>
+							<tr>
+								<th><i class="require-red">*</i>菜单地址：</th>
+								<td>
+								<input class="common-text required" id="menu_url"
+									name="menu_url" size="50" value="" type="text"></td>
+							</tr>
+							<tr>
+								<th><i class="require-red">*</i>菜单排序：</th>
+								<td>
+								<input class="common-text required" id="sort_num"
+									name="sort_num" size="50" value="" type="text"></td>
+							</tr>
+							<tr>
+								<th>删除标志：</th>
+								<td><input type="radio" name="is_del" value="1"
+									checked="checked" /> 删除 <input type="radio"
+									name="is_del" value="0" /> 正常</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td><input class="btn btn-primary btn6 mr10" value="提交"
+									type="submit"> <input class="btn btn6"
+									onclick="history.go(-1)" value="返回" type="button"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<!-- end -->
+</div>
+<!--/main-->
+</body>
+</html>
