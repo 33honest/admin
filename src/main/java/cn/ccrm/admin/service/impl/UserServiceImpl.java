@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.ccrm.admin.dao.UserDao;
+import cn.ccrm.admin.entity.Const;
 import cn.ccrm.admin.entity.ReturnModel;
 import cn.ccrm.admin.entity.User;
 import cn.ccrm.admin.enums.StatusCodeEnum;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements IUserService {
 		String password = pm.getString("password");
 		
 		if(Tools.isEmpty(userName) ||  Tools.isEmpty(password)) {
-			ReturnModel.getModel(StatusCodeEnum.STATUS_4001.getCode(), "fail", null);
+			ReturnModel.getModel(StatusCodeEnum.STATUS_4001.getCode(), "fail", StatusCodeEnum.STATUS_4001.getMsg());
 		}
 		
 		
@@ -45,25 +46,27 @@ public class UserServiceImpl implements IUserService {
 			
 			if(null != userInfo) {
 				if("lock".equals(userInfo.getStatus())) {
-					return ReturnModel.getModel(StatusCodeEnum.STATUS_4003.getCode(), "fail", null);
+					return ReturnModel.getModel(StatusCodeEnum.STATUS_4003.getCode(), "fail", StatusCodeEnum.STATUS_4003.getMsg());
 				}
 				String userId = userInfo.getUserId();
 				
-				
+				session.setAttribute(Const.SESSION_USER, userInfo);
+				userDao.saveLoginTime(userId);
+				return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("账号登录错误:{}", e.getMessage());
+			logger.error("账号[{}]登录错误:{}", userName, e.getMessage());
 		}
 		
-		return ReturnModel.getModel(StatusCodeEnum.STATUS_4004.getCode(), "fail", null);
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_4004.getCode(), "fail", StatusCodeEnum.STATUS_4004.getMsg());
 	}
 
 	@Override
 	public String logout(HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		session.removeAttribute(Const.SESSION_USER);
+		return "login";
 	}
 
 	@Override

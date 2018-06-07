@@ -18,29 +18,14 @@ canvas {
 }
 </style>
 <script src="/js/jquery.js"></script>
-<script src="/js/verificationNumbers.js"></script>
 <script src="/js/Particleground.js"></script>
-<script>
-	$(document).ready(function() {
-		//粒子背景特效
-		$('body').particleground({
-			dotColor : '#5cbdaa',
-			lineColor : '#5cbdaa'
-		});
-		//验证码
-		createCode();
-		//测试提交，对接程序删除即可
-		$(".submit_btn").click(function() {
-		});
-	});
-</script>
 </head>
 <body>
 	<dl class="admin_login">
 		<dt>
 			<strong>站点后台管理系统</strong> <em>Management System</em>
 		</dt>
-		<form name="loginForm" id="loginForm" method="POST" action="#" >
+		<form name="loginForm" id="loginForm" method="POST" action="#">
 			<dd class="user_icon">
 				<input type="text" placeholder="账号" name="username"
 					class="login_txtbx" />
@@ -49,17 +34,8 @@ canvas {
 				<input type="password" placeholder="密码" name="password"
 					class="login_txtbx" />
 			</dd>
-			<dd class="val_icon">
-				<div class="checkcode">
-					<input type="text" id="J_codetext" name="authcode"
-						placeholder="验证码" maxlength="4" class="login_txtbx">
-					<canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-				</div>
-				<input type="button" value="验证码核验" class="ver_btn"
-					onClick="validate();">
-			</dd>
 			<dd>
-				<input type="submit" value="立即登陆" class="submit_btn" />
+				<input type="submit" id="submit" value="立即登陆" class="submit_btn" />
 			</dd>
 		</form>
 		<dd>
@@ -67,5 +43,55 @@ canvas {
 			<p></p>
 		</dd>
 	</dl>
+<script>
+	$(document).ready(function() {
+		//粒子背景特效
+		$('body').particleground({
+			dotColor : '#5cbdaa',
+			lineColor : '#5cbdaa'
+		});
+	});
+
+	$(function() {
+		$("#submit").click(
+				function() {
+					if (checkLogin()) {
+						$.ajax({
+							type : "POST",
+							url : "/login.do",
+							data : {
+								username : $("input[name='username']").val(),
+								password : $("input[name='password']").val(),
+								time : new Date().getTime()
+							},
+							dataType : "json",
+							cache : false,
+							success : function(data) {
+								if ("success" == data.status) {
+									window.location.href = "/goods/index";
+								} else {
+									alert(data.data);
+								}
+							}
+						})
+					}
+					return false;
+				});
+
+		function checkLogin() {
+			if ($("input[name='username']").val() == "") {
+				alert("请输入账号")
+				$("input[name='username']").focus();
+				return false;
+			}
+			if ($("input[name='password']").val() == "") {
+				alert("请输入密码")
+				$("input[name='password']").focus();
+				return false;
+			}
+			return true;
+		}
+	});
+</script>	
 </body>
 </html>
