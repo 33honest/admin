@@ -21,6 +21,12 @@
 			<MaxFileSize>1000MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
+	
+	<logger name="org.mybatis"  additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
 
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />

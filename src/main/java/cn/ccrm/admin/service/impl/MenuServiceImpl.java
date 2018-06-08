@@ -73,13 +73,18 @@ public class MenuServiceImpl implements IMenuService{
 	@Override
 	public Map<String, Object> addMenu(ParameterMap pm,HttpSession session) {
 		try {
-			long newId = menuDao.getMaxIdByName();
+			long newId = 0;
+			try {
+				newId = menuDao.getMaxIdByName();
+			} catch (Exception e) {}
+			
 			String userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			pm.put("menu_id", newId+1);
 			pm.put("user_id", userId);
 			pm.put("create_time", DateUtil.getTime());
 			menuDao.saveMenu(pm);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ReturnModel.getModel(StatusCodeEnum.STATUS_4008.getCode(), "failed", StatusCodeEnum.STATUS_4008.getMsg());
 		}
 		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);

@@ -21,13 +21,13 @@ public class ImgUtil {
 	 * @throws IOException
 	 */
 	public static String uploadImg(String rootPATH, String filePath, InputStream in) throws IOException {
-		System.out.println("rootPATH=" + rootPATH);
-		System.out.println("filePath=" + filePath);
-		String rusultPath = rootPATH + filePath;
-		createFile(rusultPath);
-		File realFile = new File(rusultPath);
+		
+		rootPATH = rootPATH + DateUtil.getDays() + "/";
+		String resultPath = rootPATH + filePath;
+		createFile(resultPath);
+		File realFile = new File(resultPath);
 		FileUtils.copyInputStreamToFile(in, realFile);
-		return "/upload/show" + filePath;
+		return resultPath;
 	}
 
 	/**

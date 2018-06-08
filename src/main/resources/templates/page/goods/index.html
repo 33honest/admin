@@ -16,14 +16,12 @@
                             <td>
                                 <select name="search-sort" id="">
                                     <option value="">全部</option>
-                                    <option value="19">运动健身</option>
-                                     <option value="20">旅游</option>
-                                    <option value="21">文学艺术</option>
-                                    <option value="22">演讲</option>
-                                    <option value="23">经济</option>
-                                    <option value="24">电影</option>
-                                    <option value="25">科技</option>
-                                    <option value="26">美食</option>
+                                    <#list menus as menu>
+                                    <option value="${menu.MENU_ID}">${menu.MENU_NAME}</option>
+                                    <#list menu.subMenu as subMenu>
+                                    <option value="${subMenu.MENU_ID}">——${subMenu.MENU_NAME}</option>
+                                    </#list>
+                                    </#list>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
@@ -46,33 +44,33 @@
                     <table class="result-tab" width="100%">
                         <tr>
                             <th class="tc" width="5%"></th>
-                            <th>标签ID</th>
-                            <th>课程名称</th>
-                            <th>购买者用户名</th>
-                            <th>销售者用户名</th>
-                            <th>订单时间</th>
-                            <th>课程价格</th>
+                            <th>产品标题</th>
+                            <th>产品分类</th>
+                            <th>添加时间</th>
+                            <th>更新时间</th>
+                            <th>上架标记</th>
+                            <th>操作产品</th>
                         </tr>
+                        <#list goodsList as goods>
                         <tr>
-                            <td class="tc"><input name="id[]" value="" type="checkbox"></td>
-                            <td>01</td> <!--标签ID-->
-                            <td><a target="_blank" href="中国传统人生智慧.html">中国传统人生智慧</a> <!--课程名称-->
+                            <td class="tc"><input name="id[]" value="${goods.goods_id}" type="checkbox"></td>
+                            <td>${goods.goods_name}</td> <!--标签ID-->
+                            <td><a target="_blank" href="${goods.goods_id}">${goods.menu_name}</a></td>
+                            <td>${goods.create_time}</td>
+                            <td>${goods.update_time}</td>
+                            <td>
+                            <#if goods.is_marketable == 1>
+                            已上架
+                            <#else>
+                            未上架
+                            </#if>
                             </td>
-                            <td>张</td> <!--购买者用户名-->
-                            <td>王</td> <!--销售者用户名-->
-                            <td>2014-03-15 21:11:01</td> <!--订单时间-->
-                            <td>129元</td> <!--课程价格-->
-                        </tr>
-                        <tr>
-                            <td class="tc"><input name="id[]" value="" type="checkbox"></td>
-                            <td>02</td> <!--标签ID-->
-                            <td><a target="_blank" href="科学究竟是什么.html">科学究竟是什么</a> <!--课程名称-->
+                            <td>
+                            <a href="/goods/edit?goods_id=${goods.goods_id}" class="btn btn-xs btn-info">修改</a> 
+                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.MENU_ID})"><font>删除</font></span>
                             </td>
-                            <td>张</td> <!--购买者用户名-->
-                            <td>王</td> <!--销售者用户名-->
-                            <td>2014-03-25 21:11:01</td> <!--订单时间-->
-                            <td>99元</td> <!--课程价格-->
                         </tr>
+                        </#list>
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>

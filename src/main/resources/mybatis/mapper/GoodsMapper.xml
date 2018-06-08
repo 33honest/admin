@@ -1,210 +1,220 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.ccrm.admin.dao.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.Goods" >
-    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="thumb" property="thumb" jdbcType="VARCHAR" />
-    <result column="del_state" property="delState" jdbcType="TINYINT" />
-    <result column="simple_describe" property="simpleDescribe" jdbcType="VARCHAR" />
-    <result column="is_marketable" property="isMarketable" jdbcType="TINYINT" />
-    <result column="recommend" property="recommend" jdbcType="TINYINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.ccrm.admin.entity.Goods" extends="BaseResultMap" >
-    <result column="detail_describe" property="detailDescribe" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    goods_id, category_id, goods_name, nickname, thumb, del_state, simple_describe, is_marketable, 
-    recommend, create_time, update_time, admin_id
-  </sql>
-  <sql id="Blob_Column_List" >
-    detail_describe
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from sys_goods
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sys_goods
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.ccrm.admin.entity.Goods" >
-    insert into sys_goods (goods_id, category_id, goods_name, 
-      nickname, thumb, del_state, 
-      simple_describe, is_marketable, recommend, 
-      create_time, update_time, admin_id, 
-      detail_describe)
-    values (#{goodsId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, #{delState,jdbcType=TINYINT}, 
-      #{simpleDescribe,jdbcType=VARCHAR}, #{isMarketable,jdbcType=TINYINT}, #{recommend,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER}, 
-      #{detailDescribe,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.ccrm.admin.entity.Goods" >
-    insert into sys_goods
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        goods_id,
-      </if>
-      <if test="categoryId != null" >
-        category_id,
-      </if>
-      <if test="goodsName != null" >
-        goods_name,
-      </if>
-      <if test="nickname != null" >
-        nickname,
-      </if>
-      <if test="thumb != null" >
-        thumb,
-      </if>
-      <if test="delState != null" >
-        del_state,
-      </if>
-      <if test="simpleDescribe != null" >
-        simple_describe,
-      </if>
-      <if test="isMarketable != null" >
-        is_marketable,
-      </if>
-      <if test="recommend != null" >
-        recommend,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="adminId != null" >
-        admin_id,
-      </if>
-      <if test="detailDescribe != null" >
-        detail_describe,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="goodsName != null" >
-        #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null" >
-        #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="delState != null" >
-        #{delState,jdbcType=TINYINT},
-      </if>
-      <if test="simpleDescribe != null" >
-        #{simpleDescribe,jdbcType=VARCHAR},
-      </if>
-      <if test="isMarketable != null" >
-        #{isMarketable,jdbcType=TINYINT},
-      </if>
-      <if test="recommend != null" >
-        #{recommend,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminId != null" >
-        #{adminId,jdbcType=INTEGER},
-      </if>
-      <if test="detailDescribe != null" >
-        #{detailDescribe,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.Goods" >
-    update sys_goods
-    <set >
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="goodsName != null" >
-        goods_name = #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null" >
-        thumb = #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="delState != null" >
-        del_state = #{delState,jdbcType=TINYINT},
-      </if>
-      <if test="simpleDescribe != null" >
-        simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
-      </if>
-      <if test="isMarketable != null" >
-        is_marketable = #{isMarketable,jdbcType=TINYINT},
-      </if>
-      <if test="recommend != null" >
-        recommend = #{recommend,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminId != null" >
-        admin_id = #{adminId,jdbcType=INTEGER},
-      </if>
-      <if test="detailDescribe != null" >
-        detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ccrm.admin.entity.Goods" >
-    update sys_goods
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      goods_name = #{goodsName,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      del_state = #{delState,jdbcType=TINYINT},
-      simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
-      is_marketable = #{isMarketable,jdbcType=TINYINT},
-      recommend = #{recommend,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      admin_id = #{adminId,jdbcType=INTEGER},
-      detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR}
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.Goods" >
-    update sys_goods
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      goods_name = #{goodsName,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      del_state = #{delState,jdbcType=TINYINT},
-      simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
-      is_marketable = #{isMarketable,jdbcType=TINYINT},
-      recommend = #{recommend,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      admin_id = #{adminId,jdbcType=INTEGER}
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </update>
+<mapper namespace="cn.ccrm.admin.dao.GoodsMapper">
+	<resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.Goods">
+		<id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+		<result column="category_id" property="categoryId" jdbcType="INTEGER" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="thumb" property="thumb" jdbcType="VARCHAR" />
+		<result column="del_state" property="delState" jdbcType="TINYINT" />
+		<result column="simple_describe" property="simpleDescribe"
+			jdbcType="VARCHAR" />
+		<result column="is_marketable" property="isMarketable"
+			jdbcType="TINYINT" />
+		<result column="recommend" property="recommend" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="admin_id" property="adminId" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.ccrm.admin.entity.Goods"
+		extends="BaseResultMap">
+		<result column="detail_describe" property="detailDescribe"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		goods_id, category_id, goods_name, nickname, thumb, del_state, simple_describe,
+		is_marketable,
+		recommend, create_time, update_time, admin_id
+	</sql>
+	<sql id="Blob_Column_List">
+		detail_describe
+	</sql>
+	<select id="selectByPrimaryKey" resultType="pm"
+		parameterType="pm">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sys_goods
+		where goods_id = #{goods_id}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_goods
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="pm">
+		insert into sys_goods (goods_id, category_id, goods_name,
+		nickname, thumb, del_state,
+		simple_describe, is_marketable, recommend,
+		create_time, update_time, admin_id,
+		detail_describe)
+		values (#{goodsId}, #{categoryId}, #{goodsName},
+		#{nickname}, #{thumb}, #{delState},
+		#{simpleDescribe}, #{isMarketable}, #{recommend},
+		#{createTime}, #{updateTime}, #{adminId},
+		#{detailDescribe})
+	</insert>
+	<insert id="insertSelective" parameterType="pm">
+		insert into sys_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goods_id != null">
+				goods_id,
+			</if>
+			<if test="category_id != null">
+				category_id,
+			</if>
+			<if test="goods_name != null">
+				goods_name,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="thumb != null">
+				thumb,
+			</if>
+			<if test="del_state != null">
+				del_state,
+			</if>
+			<if test="simple_describe != null">
+				simple_describe,
+			</if>
+			<if test="is_marketable != null">
+				is_marketable,
+			</if>
+			<if test="recommend != null">
+				recommend,
+			</if>
+			<if test="create_time != null">
+				create_time,
+			</if>
+			<if test="update_time != null">
+				update_time,
+			</if>
+			<if test="admin_id != null">
+				admin_id,
+			</if>
+			<if test="detail_describe != null">
+				detail_describe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goods_id != null">
+				#{goods_id},
+			</if>
+			<if test="category_id != null">
+				#{category_id},
+			</if>
+			<if test="goods_name != null">
+				#{goods_name},
+			</if>
+			<if test="nickname != null">
+				#{nickname},
+			</if>
+			<if test="thumb != null">
+				#{thumb},
+			</if>
+			<if test="del_state != null">
+				#{del_state},
+			</if>
+			<if test="simple_describe != null">
+				#{simple_describe},
+			</if>
+			<if test="is_marketable != null">
+				#{is_marketable},
+			</if>
+			<if test="recommend != null">
+				#{recommend},
+			</if>
+			<if test="create_time != null">
+				#{create_time},
+			</if>
+			<if test="update_time != null">
+				#{update_time},
+			</if>
+			<if test="admin_id != null">
+				#{admin_id},
+			</if>
+			<if test="detail_describe != null">
+				#{detail_describe},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.Goods">
+		update sys_goods
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="goodsName != null">
+				goods_name = #{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="thumb != null">
+				thumb = #{thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="delState != null">
+				del_state = #{delState,jdbcType=TINYINT},
+			</if>
+			<if test="simpleDescribe != null">
+				simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
+			</if>
+			<if test="isMarketable != null">
+				is_marketable = #{isMarketable,jdbcType=TINYINT},
+			</if>
+			<if test="recommend != null">
+				recommend = #{recommend,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminId != null">
+				admin_id = #{adminId,jdbcType=INTEGER},
+			</if>
+			<if test="detailDescribe != null">
+				detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ccrm.admin.entity.Goods">
+		update sys_goods
+		set category_id = #{categoryId,jdbcType=INTEGER},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		nickname = #{nickname,jdbcType=VARCHAR},
+		thumb = #{thumb,jdbcType=VARCHAR},
+		del_state = #{delState,jdbcType=TINYINT},
+		simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
+		is_marketable = #{isMarketable,jdbcType=TINYINT},
+		recommend = #{recommend,jdbcType=TINYINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		admin_id = #{adminId,jdbcType=INTEGER},
+		detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR}
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.Goods">
+		update sys_goods
+		set category_id = #{categoryId,jdbcType=INTEGER},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		nickname = #{nickname,jdbcType=VARCHAR},
+		thumb = #{thumb,jdbcType=VARCHAR},
+		del_state = #{delState,jdbcType=TINYINT},
+		simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
+		is_marketable = #{isMarketable,jdbcType=TINYINT},
+		recommend = #{recommend,jdbcType=TINYINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		admin_id = #{adminId,jdbcType=INTEGER}
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getGoodsList" parameterType="pm" resultType="pm">
+	SELECT a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.menu_name FROM `sys_goods` a LEFT JOIN `sys_menu` b ON a.`category_id` = b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id` ORDER BY a.goods_id DESC
+	</select>
 </mapper>
