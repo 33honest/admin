@@ -62,8 +62,7 @@
 		set 
 			menu_name=#{menu_name},
 			menu_url=#{menu_url},
-			menu_type=#{menu_type},
-			menu_icon=#{menu_icon},
+			parent_id=#{parent_id},
 			sort_num=#{sort_num}
 		where 
 			menu_id=#{menu_id}

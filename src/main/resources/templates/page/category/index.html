@@ -32,7 +32,9 @@
                             <td>${menu.MENU_NAME}</td>
                             <td>${menu.MENU_URL}</td>
                             <td>${menu.MENU_ORDER}</td>
-                            <td><a href="" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span></td>
+                            <td><a href="/category/edit?menu_id=${menu.MENU_ID}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span>
+                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.MENU_ID})"><font>删除</font></span>
+                            </td>
                         </tr>
                         </#list>
                     </table>

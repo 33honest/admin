@@ -65,7 +65,7 @@ public interface IMenuService {
 	 * @param session
 	 * @return
 	 */
-	public Map<String,Object> editMenu(ParameterMap pm);
+	public Map<String,Object> editMenu(ParameterMap pm, HttpSession session);
 	
 	/**
 	 * 查询菜单

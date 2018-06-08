@@ -16,6 +16,7 @@ import cn.ccrm.admin.entity.Const;
 import cn.ccrm.admin.entity.Menu;
 import cn.ccrm.admin.entity.ReturnModel;
 import cn.ccrm.admin.entity.User;
+import cn.ccrm.admin.enums.StatusCodeEnum;
 import cn.ccrm.admin.service.IMenuService;
 import cn.ccrm.admin.util.DateUtil;
 import cn.ccrm.admin.util.ParameterMap;
@@ -72,7 +73,6 @@ public class MenuServiceImpl implements IMenuService{
 	@Override
 	public Map<String, Object> addMenu(ParameterMap pm,HttpSession session) {
 		try {
-			System.out.println("pm="+pm);
 			long newId = menuDao.getMaxIdByName();
 			String userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			pm.put("menu_id", newId+1);
@@ -80,42 +80,38 @@ public class MenuServiceImpl implements IMenuService{
 			pm.put("create_time", DateUtil.getTime());
 			menuDao.saveMenu(pm);
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("add menu error", e);
-			return ReturnModel.getModel("error", "falied", null);
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4008.getCode(), "failed", StatusCodeEnum.STATUS_4008.getMsg());
 		}
-		return ReturnModel.getModel("ok", "success", null);
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);
 	}
 	
 	@Override
 	public Map<String, Object> delMenu(String menuId) {
 		try {
 			if(Tools.isEmpty(menuId) || !Tools.isNumber(menuId)){
-				return ReturnModel.getModel("你请求的是一个冒牌接口", "failed", null);
+				return ReturnModel.getModel(StatusCodeEnum.STATUS_4005.getCode(), "failed", StatusCodeEnum.STATUS_4005.getMsg());
 			}
 			menuDao.delMenu(menuId);
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("add menu error", e);
-			return ReturnModel.getModel("error", "falied", null);
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4009.getCode(), "failed", StatusCodeEnum.STATUS_4009.getMsg());
 		}
-		return ReturnModel.getModel("ok", "success", null);
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);
 	}
 	
 	@Override
-	public Map<String, Object> editMenu(ParameterMap pm) {
+	public Map<String, Object> editMenu(ParameterMap pm, HttpSession session) {
 		try {
 			String menuId = pm.getString("menu_id");
-			if(Tools.isEmpty(menuId) || !Tools.isNumber(menuId)){
-				return ReturnModel.getModel("你请求的是一个冒牌接口", "failed", null);
+			if(Tools.isEmpty(menuId)){
+				this.addMenu(pm, session);
+			}else{
+				menuDao.editMenu(pm);
 			}
-			menuDao.editMenu(pm);
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("add menu error", e);
-			return ReturnModel.getModel("error", "falied", null);
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4007.getCode(), "failed", StatusCodeEnum.STATUS_4007.getMsg());
 		}
-		return ReturnModel.getModel("ok", "success", null);
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);
 	}
 	
 	@Override
@@ -123,14 +119,12 @@ public class MenuServiceImpl implements IMenuService{
 		ParameterMap menu = null;
 		try {
 			if(Tools.isEmpty(menuId) || !Tools.isNumber(menuId)){
-				return ReturnModel.getModel("你请求的是一个冒牌接口", "failed", null);
+				return ReturnModel.getModel(StatusCodeEnum.STATUS_4005.getCode(), "failed", StatusCodeEnum.STATUS_4005.getMsg());
 			}
 			menu = menuDao.findMenu(menuId);
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("add menu error", e);
-			return ReturnModel.getModel("error", "falied", null);
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4006.getCode(), "failed", StatusCodeEnum.STATUS_4006.getMsg());
 		}
-		return ReturnModel.getModel("ok", "success", menu);
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", menu);
 	}
 }

@@ -6,15 +6,16 @@
 		<div class="crumb-wrap">
 			<div class="crumb-list">
 				<i class="icon-font"></i><a href="index.html" color="#white">首页</a><span
-					class="crumb-step">&gt;</span><span class="crumb-name">添加产品</span>
+					class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span>
 			</div>
 		</div>
 
 		<!-- begin -->
 		<div class="result-wrap">
 			<div class="result-content">
-				<form action="/category/save" method="post" id="myform" name="myform"
-					enctype="multipart/form-data">
+				<form method="post" id="myform" name="myform" >
+					<input type="hidden" name="menu_id" value="${menuDetail.menu_id}" />
+					<input type="hidden" name="actionurl" value="/category/save"/>
 					<table class="insert-tab" width="100%">
 						<tbody>
 							<tr>
@@ -22,7 +23,7 @@
 								<td><select name="parent_id" id="parent_id" class="required">
 										<option value="0">请选择</option>
 										<#list menus as menu>
-										<option value="${menu.MENU_ID}">${menu.MENU_NAME}</option>
+										<option value="${menu.MENU_ID}" <#if menuDetail.parent_id == menu.MENU_ID > selected="selected"</#if>>${menu.MENU_NAME}</option>
 										</#list>
 								</select></td>
 							</tr>
@@ -30,30 +31,24 @@
 								<th><i class="require-red">*</i>菜单名称：</th>
 								<td>
 								<input class="common-text required" id="menu_name"
-									name="menu_name" size="50" value="" type="text"></td>
+									name="menu_name" size="50" value="${menuDetail.menu_name}" type="text"></td>
 							</tr>
 							<tr>
 								<th><i class="require-red">*</i>菜单地址：</th>
 								<td>
 								<input class="common-text required" id="menu_url"
-									name="menu_url" size="50" value="" type="text"></td>
+									name="menu_url" size="50" value="${menuDetail.menu_url}" type="text"></td>
 							</tr>
 							<tr>
 								<th><i class="require-red">*</i>菜单排序：</th>
 								<td>
 								<input class="common-text required" id="sort_num"
-									name="sort_num" size="50" value="" type="text"></td>
-							</tr>
-							<tr>
-								<th>删除标志：</th>
-								<td><input type="radio" name="is_del" value="1"
-									checked="checked" /> 删除 <input type="radio"
-									name="is_del" value="0" /> 正常</td>
+									name="sort_num" size="50" value="${menuDetail.sort_num}" type="text"></td>
 							</tr>
 							<tr>
 								<th></th>
 								<td><input class="btn btn-primary btn6 mr10" value="提交"
-									type="submit"> <input class="btn btn6"
+									type="button"  id="submitBtn" /> <input class="btn btn6"
 									onclick="history.go(-1)" value="返回" type="button"></td>
 							</tr>
 						</tbody>
@@ -66,5 +61,6 @@
 	<!-- end -->
 </div>
 <!--/main-->
+<script type="text/javascript" src="/js/menu.js"></script>
 </body>
 </html>

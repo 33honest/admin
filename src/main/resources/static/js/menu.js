@@ -29,25 +29,21 @@ $(function () {
     $("#submitBtn").click(function(){
     	var menuId = $("input[name='menu_id']").val();
     	var actionUrl = $("input[name='actionurl']").val();
-    	var parentId = $("input[name='parent_id']").val();
+    	var parentId = $("#parent_id").val();
     	var menuName = $("input[name='menu_name']").val();
     	var menuUrl = $("input[name='menu_url']").val();
-    	var menuType = $("[name='menu_type']").val();
-    	var menuIcon = $("input[name='menu_icon']").val();
-    	var menuOrder = $("input[name='menu_order']").val();
+    	var sortNum = $("input[name='sort_num']").val();
     	$.ajax({
     		type:"POST",
     		url:actionUrl,
-    		data:{menu_id:menuId,parent_id:parentId,menu_name:menuName,menu_url:menuUrl,menu_type:menuType,menu_icon:menuIcon,sort_num:menuOrder},
+    		data:{menu_id:menuId,parent_id:parentId,menu_name:menuName,menu_url:menuUrl,sort_num:sortNum},
     		dataType:"json",
     		cache:false,
     		success:function(data){
     			if(data.status == 'success'){
-    				$("#menuModal").modal("hide");
-    				//刷新
     				window.location.href=window.location.href;
     			}else{
-    				alert(data.msg);
+    				alert(data.data);
     			}
     		}
     	});
@@ -67,7 +63,7 @@ $(function () {
 	  if(confirm("你确定要删除此菜单吗？")){
 		  $.ajax({
 			  type:"GET",		  
-			  url:_ctx+"/menu/del/"+menuId,
+			  url:"/category/del/"+menuId,
 			  data:{time:new Date()},
 			  dataType:"json",
 			  cache:false,
@@ -75,7 +71,7 @@ $(function () {
 				  if(data.status == "success"){
 						window.location.href=window.location.href;
 				  }else{
-					  alert(data.msg);
+					  alert(data.data);
 				  }
 			  }
 		  });
@@ -83,23 +79,7 @@ $(function () {
   }
   //编辑菜单
   function editMenu(menuId){
-	  $.ajax({
-		  type:"GET",		  
-		  url:_ctx+"/menu/query/"+menuId,
-		  data:{time:new Date()},
-		  dataType:"json",
-		  cache:false,
-		  success:function(data){
-			  if(data.status == "success"){
-				  var obj = data.data;
-				  reloadMenuModel("编辑菜单",obj.menu_id,obj.parent_id,obj.menu_name,obj.menu_url,obj.menu_type,obj.menu_icon,obj.sort_num);
-				  reloadActionBtn(_ctx+"/menu/edit","更新");
-				  $("#menuModal").modal("show");
-			  }else{
-				  alert(data.msg);
-			  }
-		  }
-	  });
+	  window.location.href = "/category/edit?menu_id=" + menuId;
   }
   
   /*
