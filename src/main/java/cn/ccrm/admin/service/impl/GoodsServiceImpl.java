@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +50,27 @@ public class GoodsServiceImpl implements IGoodsService {
 			String pics = pm.getString("thumb");
 			String userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			if (Tools.notEmpty(pics)) {
-				pics = replaceBase64Before(pics);
-				byte[] bytes = Base64.base64ToByteArray(pics);
-				InputStream in = new ByteArrayInputStream(bytes);
-				String filePath = DateUtil.getDays() + Tools.random(8) + ".png";
-				String userPath = ImgUtil.uploadImg(proConfig.getUpload(), filePath, in);
-				pm.put("thumb", userPath);
+				if(pics.indexOf("ta:image") > 0) {
+					pics = replaceBase64Before(pics);
+					byte[] bytes = Base64.base64ToByteArray(pics);
+					InputStream in = new ByteArrayInputStream(bytes);
+					String filePath = DateUtil.getDays() + Tools.random(8) + ".png";
+					String userPath = ImgUtil.uploadImg(proConfig.getUpload(), filePath, in);
+					pm.put("thumb", userPath);
+				}else{
+					pm.remove("thumb");
+				}
 			}
+			String goodsId = pm.getString("goods_id");
 			pm.put("admin_id", userId);
-			pm.put("create_time", DateUtil.getTime());
-			goodsDao.insertSelective(pm);
+			if(StringUtils.isNoneBlank(goodsId)) {
+				pm.put("update_time", DateUtil.getTime());
+				goodsDao.updateByPrimaryKeySelective(pm);
+			}else{
+				pm.put("create_time", DateUtil.getTime());
+				goodsDao.insertSelective(pm);
+			}
+			
 		} catch (Exception e) {
 			return ReturnModel.getModel(StatusCodeEnum.STATUS_4010.getCode(), "failed", StatusCodeEnum.STATUS_4010.getMsg());
 		}

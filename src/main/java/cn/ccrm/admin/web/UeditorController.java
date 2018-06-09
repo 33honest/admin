@@ -28,7 +28,7 @@ public class UeditorController {
 	@Autowired
 	private Environment environment;
 
-	private final static String staticPath = "static/";
+	private final static String staticPath = "/public";
 
 	public UeditorController() {
 		String path = UeditorController.class.getClassLoader().getResource("config.json").getPath();

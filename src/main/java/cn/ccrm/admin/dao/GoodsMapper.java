@@ -15,11 +15,11 @@ public interface GoodsMapper {
 
 	public ParameterMap selectByPrimaryKey(ParameterMap pm);
 
-	int updateByPrimaryKeySelective(Goods record);
+	int updateByPrimaryKeySelective(ParameterMap pm);
 
-	int updateByPrimaryKeyWithBLOBs(Goods record);
+	int updateByPrimaryKeyWithBLOBs(ParameterMap pm);
 
-	int updateByPrimaryKey(Goods record);
+	int updateByPrimaryKey(ParameterMap pm);
 	
 	public List<ParameterMap> getGoodsList(ParameterMap pm);
 }

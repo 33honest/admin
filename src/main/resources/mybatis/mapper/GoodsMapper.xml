@@ -140,77 +140,77 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.Goods">
+	<update id="updateByPrimaryKeySelective" parameterType="pm">
 		update sys_goods
 		<set>
 			<if test="categoryId != null">
-				category_id = #{categoryId,jdbcType=INTEGER},
+				category_id = #{category_id},
 			</if>
-			<if test="goodsName != null">
-				goods_name = #{goodsName,jdbcType=VARCHAR},
+			<if test="goods_name != null">
+				goods_name = #{goods_name},
 			</if>
 			<if test="nickname != null">
-				nickname = #{nickname,jdbcType=VARCHAR},
+				nickname = #{nickname},
 			</if>
 			<if test="thumb != null">
-				thumb = #{thumb,jdbcType=VARCHAR},
+				thumb = #{thumb},
 			</if>
-			<if test="delState != null">
-				del_state = #{delState,jdbcType=TINYINT},
+			<if test="del_state != null">
+				del_state = #{del_state},
 			</if>
-			<if test="simpleDescribe != null">
-				simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
+			<if test="simple_describe != null">
+				simple_describe = #{simple_describe},
 			</if>
-			<if test="isMarketable != null">
-				is_marketable = #{isMarketable,jdbcType=TINYINT},
+			<if test="is_marketable != null">
+				is_marketable = #{is_marketable},
 			</if>
 			<if test="recommend != null">
-				recommend = #{recommend,jdbcType=TINYINT},
+				recommend = #{recommend},
 			</if>
-			<if test="createTime != null">
-				create_time = #{createTime,jdbcType=TIMESTAMP},
+			<if test="create_time != null">
+				create_time = #{create_time},
 			</if>
-			<if test="updateTime != null">
-				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			<if test="update_time != null">
+				update_time = #{update_time},
 			</if>
-			<if test="adminId != null">
-				admin_id = #{adminId,jdbcType=INTEGER},
+			<if test="admin_id != null">
+				admin_id = #{admin_id},
 			</if>
-			<if test="detailDescribe != null">
-				detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR},
+			<if test="detail_describe != null">
+				detail_describe = #{detail_describe},
 			</if>
 		</set>
-		where goods_id = #{goodsId,jdbcType=INTEGER}
+		where goods_id = #{goods_id}
 	</update>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ccrm.admin.entity.Goods">
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="pm">
 		update sys_goods
-		set category_id = #{categoryId,jdbcType=INTEGER},
-		goods_name = #{goodsName,jdbcType=VARCHAR},
-		nickname = #{nickname,jdbcType=VARCHAR},
-		thumb = #{thumb,jdbcType=VARCHAR},
-		del_state = #{delState,jdbcType=TINYINT},
-		simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
-		is_marketable = #{isMarketable,jdbcType=TINYINT},
-		recommend = #{recommend,jdbcType=TINYINT},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP},
-		admin_id = #{adminId,jdbcType=INTEGER},
-		detail_describe = #{detailDescribe,jdbcType=LONGVARCHAR}
-		where goods_id = #{goodsId,jdbcType=INTEGER}
+		set category_id = #{category_id},
+		goods_name = #{goods_name},
+		nickname = #{nickname},
+		thumb = #{thumb},
+		del_state = #{del_state},
+		simple_describe = #{simple_describe},
+		is_marketable = #{is_marketable},
+		recommend = #{recommend},
+		create_time = #{create_time},
+		update_time = #{update_time},
+		admin_id = #{admin_id},
+		detail_describe = #{detail_describe}
+		where goods_id = #{goods_id}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.Goods">
 		update sys_goods
-		set category_id = #{categoryId,jdbcType=INTEGER},
-		goods_name = #{goodsName,jdbcType=VARCHAR},
-		nickname = #{nickname,jdbcType=VARCHAR},
-		thumb = #{thumb,jdbcType=VARCHAR},
-		del_state = #{delState,jdbcType=TINYINT},
-		simple_describe = #{simpleDescribe,jdbcType=VARCHAR},
-		is_marketable = #{isMarketable,jdbcType=TINYINT},
-		recommend = #{recommend,jdbcType=TINYINT},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP},
-		admin_id = #{adminId,jdbcType=INTEGER}
+		set category_id = #{category_id},
+		goods_name = #{goods_name},
+		nickname = #{nickname},
+		thumb = #{thumb},
+		del_state = #{del_state},
+		simple_describe = #{simple_describe},
+		is_marketable = #{is_marketable},
+		recommend = #{recommend},
+		create_time = #{create_time},
+		update_time = #{update_time},
+		admin_id = #{admin_id},
 		where goods_id = #{goodsId,jdbcType=INTEGER}
 	</update>
 	
