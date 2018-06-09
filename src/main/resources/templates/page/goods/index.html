@@ -33,10 +33,11 @@
             </div>
         </div>
         <div class="result-wrap">
+        	<input type="hidden" id="id" value="" />
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a id="batchDel" href="javascript:void(0)" onclick="delAllSelectsGoods();"><i class="icon-font"></i>批量删除</a>
                         <a href="/goods/edit"><i class="icon-font">&#xe008;</i>添加产品</a>
                     </div>
                 </div>
@@ -53,7 +54,7 @@
                         </tr>
                         <#list goodsList as goods>
                         <tr>
-                            <td class="tc"><input name="id[]" value="${goods.goods_id}" type="checkbox"></td>
+                            <td class="tc"><input name="goods_id" value="${goods.goods_id}" type="checkbox"></td>
                             <td><a target="_blank" href="${goods.goods_id}">${goods.goods_name}</a></td>
                             <td>${goods.menu_name}</td>
                             <td>${goods.create_time}</td>
@@ -67,7 +68,7 @@
                             </td>
                             <td>
                             <a href="/goods/edit?goods_id=${goods.goods_id}" class="btn btn-xs btn-info">修改</a> 
-                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.MENU_ID})"><font>删除</font></span>
+                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delGoods(${goods.goods_id})"><font>删除</font></span>
                             </td>
                         </tr>
                         </#list>
@@ -79,5 +80,40 @@
     </div>
     <!--/main-->
 </div>
+<script type="text/javascript">
+
+var ids = "";
+function delAllSelectsGoods() {
+	var vIds = [];
+	$("input[name='goods_id']:checkbox").each(function(index) {
+	    if ($(this).prop("checked") === true) {
+	        vIds.push($(this).val());
+	    }
+	});
+	ids = vIds.join();
+	if (ids.length > 0) {
+		delGoods(ids);
+	}
+	
+}
+function delGoods(id){
+	  if(confirm("你确定要删除吗？")){
+		  $.ajax({
+			  type:"POST",		  
+			  url:"/goods/del",
+			  data:{time:new Date(),goods_id:id},
+			  dataType:"json",
+			  cache:false,
+			  success:function(data){
+				  if(data.status == "success"){
+						window.location.href=window.location.href;
+				  }else{
+					  alert(data.data);
+				  }
+			  }
+		  });
+	  }
+}
+</script>
 </body>
 </html>

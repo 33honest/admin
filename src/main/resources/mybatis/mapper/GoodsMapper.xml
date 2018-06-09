@@ -43,6 +43,12 @@
 		delete from sys_goods
 		where goods_id = #{goodsId,jdbcType=INTEGER}
 	</delete>
+	<delete id="deleteGoods" parameterType="pm">
+		delete from sys_goods where goods_id in 
+		<foreach item="goodsId" collection="goods_id" open="(" separator="," close=")">
+		#{goodsId}
+		</foreach>
+	</delete>
 	<insert id="insert" parameterType="pm">
 		insert into sys_goods (goods_id, category_id, goods_name,
 		nickname, thumb, del_state,

@@ -2,6 +2,8 @@ package cn.ccrm.admin.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -86,8 +88,26 @@ public class GoodsServiceImpl implements IGoodsService {
 
 	@Override
 	public HashMap<String, Object> del(ParameterMap pm) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(StringUtils.isBlank(pm.getString("goods_id"))) {
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4005.getCode(), "failed", StatusCodeEnum.STATUS_4005.getMsg());
+		}
+		
+		List<String> goods_id = new ArrayList<>();
+		if(pm.getString("goods_id").indexOf(",") > 0) {
+			String[] goodsArr = pm.getString("goods_id").split(",");
+			goods_id = Arrays.asList(goodsArr);
+		}else{
+			goods_id.add(pm.getString("goods_id"));
+		}
+		pm.put("goods_id", goods_id);
+		try {
+			goodsDao.deleteGoods(pm);
+		} catch (Exception e) {
+			return ReturnModel.getModel(StatusCodeEnum.STATUS_4012.getCode(), "failed", StatusCodeEnum.STATUS_4012.getMsg());
+		}
+		
+		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", StatusCodeEnum.STATUS_0000.getMsg());
 	}
 
 	/**

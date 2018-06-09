@@ -55,4 +55,10 @@ public class GoodsController extends BaseController {
 		return goodsService.add(this.getParameterMap(), this.getSession());
 	}
 	
+	@RequestMapping("/del")
+	@ResponseBody
+	public Object del() {
+		return goodsService.del(this.getParameterMap());
+	}
+	
 }

@@ -17,6 +17,7 @@ public enum StatusCodeEnum {
 	STATUS_4009("4009", "删除菜单数据，数据库出现异常"),
 	STATUS_4010("4010", "添加产品数据，数据库出现异常"),
 	STATUS_4011("4011", "读取产品数据，数据库出现异常"),
+	STATUS_4012("4012", "删除产品数据，数据库出现异常"),
 	STATUS_9999("9999", "未知错误");
 
 	private String code;
