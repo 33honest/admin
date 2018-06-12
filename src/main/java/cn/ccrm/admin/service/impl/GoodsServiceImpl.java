@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +20,9 @@ import com.alibaba.druid.util.Base64;
 
 import cn.ccrm.admin.config.PropertiesConfig;
 import cn.ccrm.admin.dao.GoodsMapper;
+import cn.ccrm.admin.dao.GoodsPriceMapper;
 import cn.ccrm.admin.entity.Const;
+import cn.ccrm.admin.entity.GoodsPrice;
 import cn.ccrm.admin.entity.ReturnModel;
 import cn.ccrm.admin.entity.User;
 import cn.ccrm.admin.enums.StatusCodeEnum;
@@ -39,6 +42,9 @@ public class GoodsServiceImpl implements IGoodsService {
 	
 	@Autowired
 	private PropertiesConfig proConfig;
+	
+	@Autowired
+	private GoodsPriceMapper goodsPriceDao;
 
 	@Override
 	public List<ParameterMap> getGoodsList(ParameterMap pm) {
@@ -68,9 +74,15 @@ public class GoodsServiceImpl implements IGoodsService {
 			if(StringUtils.isNoneBlank(goodsId)) {
 				pm.put("update_time", DateUtil.getTime());
 				goodsDao.updateByPrimaryKeySelective(pm);
+				
+				GoodsPrice record = this.mapToGoodsPrice(pm);
+				goodsPriceDao.updateByPrimaryKeySelective(record);
 			}else{
 				pm.put("create_time", DateUtil.getTime());
-				goodsDao.insertSelective(pm);
+				int goods_id = goodsDao.insertSelective(pm);
+				pm.put("goods_id", goods_id);
+				GoodsPrice record = this.mapToGoodsPrice(pm);
+				goodsPriceDao.insert(record);
 			}
 			
 		} catch (Exception e) {
@@ -135,6 +147,71 @@ public class GoodsServiceImpl implements IGoodsService {
 			e.printStackTrace();
 		}
 		return ReturnModel.getModel(StatusCodeEnum.STATUS_4011.getCode(), "failed", StatusCodeEnum.STATUS_4011.getMsg());
+	}
+	
+	private ParameterMap goodsPriceToMap(GoodsPrice gp) {
+		
+		ParameterMap pm = new ParameterMap();
+		
+		if(null != gp.getAdminId()) {
+			pm.put("admin_id", gp.getAdminId());
+		}
+		if(null != gp.getBuyPrice()) {
+			pm.put("buy_price", gp.getBuyPrice());
+		}
+		if(null != gp.getGoodsId()) {
+			pm.put("goods_id", gp.getGoodsId());
+		}
+		if(null != gp.getRetailPrice()) {
+			pm.put("retail_price", gp.getRetailPrice());
+		}
+		if(null != gp.getState()) {
+			pm.put("state", gp.getState());
+		}
+		if(null != gp.getUnitName()) {
+			pm.put("unit_name", gp.getUnitName());
+		}
+		if(null != gp.getWholesalePrice()) {
+			pm.put("wholesale_price", gp.getWholesalePrice());
+		}
+		if(null != gp.getCreateTime()) {
+			pm.put("create_time", gp.getCreateTime());
+		}
+		if(null != gp.getUpdateTime()) {
+			pm.put("update_time", gp.getUpdateTime());
+		}
+		
+		return pm;
+	}
+	
+	private GoodsPrice mapToGoodsPrice(ParameterMap pm) {
+		GoodsPrice gp = new GoodsPrice();
+		
+		if(pm.containsKey("admin_id")) {
+			gp.setAdminId(Integer.valueOf(pm.getString("admin_id")));
+		}
+		if(pm.containsKey("buy_price")) {
+			gp.setBuyPrice(Integer.valueOf(pm.getString("buy_price")));
+		}
+		if(pm.containsKey("goods_id")) {
+			gp.setGoodsId(Integer.valueOf(pm.getString("goods_id")));
+		}
+		if(pm.containsKey("retail_price")) {
+			gp.setRetailPrice(Integer.valueOf(pm.getString("retail_price")));
+		}
+		if(pm.containsKey("state")) {
+			gp.setState(Byte.valueOf(pm.getString("state")));
+		}
+		if(pm.containsKey("unit_name")) {
+			gp.setUnitName(pm.getString("unit_name"));
+		}
+		if(pm.containsKey("wholesale_price")) {
+			gp.setWholesalePrice(Integer.valueOf(pm.getString("wholesale_price")));
+		}
+		gp.setCreateTime(new Date());
+		gp.setUpdateTime(new Date());
+		
+		return gp;
 	}
 
 }

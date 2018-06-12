@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ccrm.admin.common.CommonConst;
+import cn.ccrm.admin.service.IGoodsPriceService;
 import cn.ccrm.admin.service.IGoodsService;
 import cn.ccrm.admin.service.IMenuService;
 import cn.ccrm.admin.util.ParameterMap;
@@ -26,6 +27,9 @@ public class GoodsController extends BaseController {
 	
 	@Autowired
 	private IGoodsService goodsService;
+	
+	@Autowired
+	private IGoodsPriceService goodsPriceService;
 	
 	@RequestMapping("/index")
 	public String index(ModelMap model) {
