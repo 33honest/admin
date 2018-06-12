@@ -2,6 +2,7 @@ package cn.ccrm.admin.dao;
 
 import java.util.List;
 
+import cn.ccrm.admin.entity.Goods;
 import cn.ccrm.admin.util.ParameterMap;
 
 public interface GoodsMapper {
@@ -23,4 +24,6 @@ public interface GoodsMapper {
 	public List<ParameterMap> getGoodsList(ParameterMap pm);
 	
 	int deleteGoods(ParameterMap pm);
+	
+	int insertBean(Goods goods);
 }

@@ -23,42 +23,46 @@
 			jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		goods_id, category_id, goods_name, nickname, thumb, del_state, simple_describe,
+		goods_id, category_id, goods_name, nickname, thumb,
+		del_state, simple_describe,
 		is_marketable,
-		recommend, create_time, update_time, admin_id
+		recommend, create_time,
+		update_time, admin_id
 	</sql>
 	<sql id="Blob_Column_List">
 		detail_describe
 	</sql>
-	<select id="selectByPrimaryKey" resultType="pm"
-		parameterType="pm">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from sys_goods
-		where goods_id = #{goods_id}
+	<select id="selectByPrimaryKey" resultType="pm" parameterType="pm">
+		SELECT a.*,b.`retail_price` FROM `sys_goods` a LEFT JOIN `sys_goods_price` b ON a.`goods_id` = b.`goods_id`
+		where a.goods_id = #{goods_id}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sys_goods
+		delete from
+		sys_goods
 		where goods_id = #{goodsId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteGoods" parameterType="pm">
-		delete from sys_goods where goods_id in 
-		<foreach item="goodsId" collection="goods_id" open="(" separator="," close=")">
-		#{goodsId}
+		delete from sys_goods where goods_id in
+		<foreach item="goodsId" collection="goods_id" open="("
+			separator="," close=")">
+			#{goodsId}
 		</foreach>
 	</delete>
 	<insert id="insert" parameterType="pm">
-		insert into sys_goods (goods_id, category_id, goods_name,
+		insert into sys_goods
+		(goods_id, category_id, goods_name,
 		nickname, thumb, del_state,
 		simple_describe, is_marketable, recommend,
-		create_time, update_time, admin_id,
+		create_time, update_time,
+		admin_id,
 		detail_describe)
-		values (#{goodsId}, #{categoryId}, #{goodsName},
+		values (#{goodsId}, #{categoryId},
+		#{goodsName},
 		#{nickname}, #{thumb}, #{delState},
-		#{simpleDescribe}, #{isMarketable}, #{recommend},
-		#{createTime}, #{updateTime}, #{adminId},
+		#{simpleDescribe},
+		#{isMarketable}, #{recommend},
+		#{createTime}, #{updateTime},
+		#{adminId},
 		#{detailDescribe})
 	</insert>
 	<insert id="insertSelective" parameterType="pm">
@@ -149,7 +153,7 @@
 	<update id="updateByPrimaryKeySelective" parameterType="pm">
 		update sys_goods
 		<set>
-			<if test="categoryId != null">
+			<if test="category_id != null">
 				category_id = #{category_id},
 			</if>
 			<if test="goods_name != null">
@@ -189,7 +193,8 @@
 		where goods_id = #{goods_id}
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="pm">
-		update sys_goods
+		update
+		sys_goods
 		set category_id = #{category_id},
 		goods_name = #{goods_name},
 		nickname = #{nickname},
@@ -199,28 +204,128 @@
 		is_marketable = #{is_marketable},
 		recommend = #{recommend},
 		create_time = #{create_time},
-		update_time = #{update_time},
+		update_time =
+		#{update_time},
 		admin_id = #{admin_id},
-		detail_describe = #{detail_describe}
+		detail_describe =
+		#{detail_describe}
 		where goods_id = #{goods_id}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.Goods">
 		update sys_goods
 		set category_id = #{category_id},
 		goods_name = #{goods_name},
-		nickname = #{nickname},
+		nickname =
+		#{nickname},
 		thumb = #{thumb},
 		del_state = #{del_state},
-		simple_describe = #{simple_describe},
+		simple_describe
+		= #{simple_describe},
 		is_marketable = #{is_marketable},
-		recommend = #{recommend},
+		recommend =
+		#{recommend},
 		create_time = #{create_time},
-		update_time = #{update_time},
+		update_time =
+		#{update_time},
 		admin_id = #{admin_id},
-		where goods_id = #{goodsId,jdbcType=INTEGER}
+		where goods_id =
+		#{goodsId,jdbcType=INTEGER}
 	</update>
-	
+
 	<select id="getGoodsList" parameterType="pm" resultType="pm">
-	SELECT a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.menu_name FROM `sys_goods` a LEFT JOIN `sys_menu` b ON a.`category_id` = b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id` ORDER BY a.goods_id DESC
+		SELECT
+		a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.menu_name
+		FROM `sys_goods` a LEFT JOIN `sys_menu` b ON a.`category_id` =
+		b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id` ORDER
+		BY a.goods_id DESC
 	</select>
+
+	<insert id="insertBean" parameterType="cn.ccrm.admin.entity.Goods">
+		<selectKey keyProperty="goodsId" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into sys_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="goodsName != null">
+				goods_name,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="thumb != null">
+				thumb,
+			</if>
+			<if test="delState != null">
+				del_state,
+			</if>
+			<if test="simpleDescribe != null">
+				simple_describe,
+			</if>
+			<if test="isMarketable != null">
+				is_marketable,
+			</if>
+			<if test="recommend != null">
+				recommend,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="adminId != null">
+				admin_id,
+			</if>
+			<if test="detailDescribe != null">
+				detail_describe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null">
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="thumb != null">
+				#{thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="delState != null">
+				#{delState,jdbcType=TINYINT},
+			</if>
+			<if test="simpleDescribe != null">
+				#{simpleDescribe,jdbcType=VARCHAR},
+			</if>
+			<if test="isMarketable != null">
+				#{isMarketable,jdbcType=TINYINT},
+			</if>
+			<if test="recommend != null">
+				#{recommend,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminId != null">
+				#{adminId,jdbcType=INTEGER},
+			</if>
+			<if test="detailDescribe != null">
+				#{detailDescribe,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
 </mapper>

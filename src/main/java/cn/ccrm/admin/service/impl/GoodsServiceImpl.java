@@ -22,6 +22,7 @@ import cn.ccrm.admin.config.PropertiesConfig;
 import cn.ccrm.admin.dao.GoodsMapper;
 import cn.ccrm.admin.dao.GoodsPriceMapper;
 import cn.ccrm.admin.entity.Const;
+import cn.ccrm.admin.entity.Goods;
 import cn.ccrm.admin.entity.GoodsPrice;
 import cn.ccrm.admin.entity.ReturnModel;
 import cn.ccrm.admin.entity.User;
@@ -78,10 +79,14 @@ public class GoodsServiceImpl implements IGoodsService {
 				GoodsPrice record = this.mapToGoodsPrice(pm);
 				goodsPriceDao.updateByPrimaryKeySelective(record);
 			}else{
-				pm.put("create_time", DateUtil.getTime());
-				int goods_id = goodsDao.insertSelective(pm);
+				
+				Goods goods = this.mapToGoods(pm);
+				goods.setCreateTime(new Date());
+				goodsDao.insertBean(goods);
+				int goods_id = goods.getGoodsId();
 				pm.put("goods_id", goods_id);
 				GoodsPrice record = this.mapToGoodsPrice(pm);
+				record.setCreateTime(new Date());
 				goodsPriceDao.insert(record);
 			}
 			
@@ -208,10 +213,54 @@ public class GoodsServiceImpl implements IGoodsService {
 		if(pm.containsKey("wholesale_price")) {
 			gp.setWholesalePrice(Integer.valueOf(pm.getString("wholesale_price")));
 		}
-		gp.setCreateTime(new Date());
-		gp.setUpdateTime(new Date());
 		
 		return gp;
+	}
+	
+	/**
+	 * HashMap对象转换成Goods对象
+	 * @param pm
+	 * @return
+	 */
+	private Goods mapToGoods(ParameterMap pm) {
+		Goods goods = new Goods();
+		
+		if(pm.containsKey("goods_id") && StringUtils.isNoneBlank(pm.getString("goods_id"))) {
+			goods.setGoodsId(Integer.valueOf(pm.getString("goods_id")));
+		}
+		if(pm.containsKey("category_id")) {
+			goods.setCategoryId(Integer.valueOf(pm.getString("category_id")));
+		}
+		if(pm.containsKey("goods_name")) {
+			goods.setGoodsName(pm.getString("goods_name"));
+		}
+		if(pm.containsKey("nickname")) {
+			goods.setNickname(pm.getString("nickname"));
+		}
+		if(pm.containsKey("thumb")) {
+			goods.setThumb(pm.getString("thumb"));
+		}
+		if(pm.containsKey("del_state")) {
+			goods.setDelState(Byte.valueOf(pm.getString("del_state")));
+		}
+		if(pm.containsKey("simple_describe")) {
+			goods.setSimpleDescribe(pm.getString("simple_describe"));
+		}
+		if(pm.containsKey("detail_describe")) {
+			goods.setDetailDescribe(pm.getString("detail_describe"));
+		}
+		if(pm.containsKey("is_marketable")) {
+			goods.setIsMarketable(Byte.valueOf(pm.getString("is_marketable")));
+		}
+		if(pm.containsKey("recommend")) {
+			goods.setRecommend(Byte.valueOf(pm.getString("recommend")));
+		}
+		if(pm.containsKey("admin_id")) {
+			goods.setAdminId(Integer.valueOf(pm.getString("admin_id")));
+		}
+		
+		return goods;
+		
 	}
 
 }

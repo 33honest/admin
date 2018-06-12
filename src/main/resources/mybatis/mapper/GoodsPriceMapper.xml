@@ -1,153 +1,154 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.ccrm.admin.dao.GoodsPriceMapper" >
-  <resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.GoodsPrice" >
-    <id column="price_id" property="priceId" jdbcType="INTEGER" />
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
-    <result column="retail_price" property="retailPrice" jdbcType="INTEGER" />
-    <result column="buy_price" property="buyPrice" jdbcType="INTEGER" />
-    <result column="wholesale_price" property="wholesalePrice" jdbcType="INTEGER" />
-    <result column="state" property="state" jdbcType="TINYINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    price_id, goods_id, unit_name, retail_price, buy_price, wholesale_price, state, create_time, 
-    update_time, admin_id
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from sys_goods_price
-    where price_id = #{priceId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sys_goods_price
-    where price_id = #{priceId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.ccrm.admin.entity.GoodsPrice" >
-    insert into sys_goods_price (price_id, goods_id, unit_name, 
-      retail_price, buy_price, wholesale_price, 
-      state, create_time, update_time, 
-      admin_id)
-    values (#{priceId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, 
-      #{retailPrice,jdbcType=INTEGER}, #{buyPrice,jdbcType=INTEGER}, #{wholesalePrice,jdbcType=INTEGER}, 
-      #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{adminId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.ccrm.admin.entity.GoodsPrice" >
-    insert into sys_goods_price
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="priceId != null" >
-        price_id,
-      </if>
-      <if test="goodsId != null" >
-        goods_id,
-      </if>
-      <if test="unitName != null" >
-        unit_name,
-      </if>
-      <if test="retailPrice != null" >
-        retail_price,
-      </if>
-      <if test="buyPrice != null" >
-        buy_price,
-      </if>
-      <if test="wholesalePrice != null" >
-        wholesale_price,
-      </if>
-      <if test="state != null" >
-        state,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="adminId != null" >
-        admin_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="priceId != null" >
-        #{priceId,jdbcType=INTEGER},
-      </if>
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="unitName != null" >
-        #{unitName,jdbcType=VARCHAR},
-      </if>
-      <if test="retailPrice != null" >
-        #{retailPrice,jdbcType=INTEGER},
-      </if>
-      <if test="buyPrice != null" >
-        #{buyPrice,jdbcType=INTEGER},
-      </if>
-      <if test="wholesalePrice != null" >
-        #{wholesalePrice,jdbcType=INTEGER},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminId != null" >
-        #{adminId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.GoodsPrice" >
-    update sys_goods_price
-    <set >
-      <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="unitName != null" >
-        unit_name = #{unitName,jdbcType=VARCHAR},
-      </if>
-      <if test="retailPrice != null" >
-        retail_price = #{retailPrice,jdbcType=INTEGER},
-      </if>
-      <if test="buyPrice != null" >
-        buy_price = #{buyPrice,jdbcType=INTEGER},
-      </if>
-      <if test="wholesalePrice != null" >
-        wholesale_price = #{wholesalePrice,jdbcType=INTEGER},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminId != null" >
-        admin_id = #{adminId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where price_id = #{priceId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.GoodsPrice" >
-    update sys_goods_price
-    set goods_id = #{goodsId,jdbcType=INTEGER},
-      unit_name = #{unitName,jdbcType=VARCHAR},
-      retail_price = #{retailPrice,jdbcType=INTEGER},
-      buy_price = #{buyPrice,jdbcType=INTEGER},
-      wholesale_price = #{wholesalePrice,jdbcType=INTEGER},
-      state = #{state,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      admin_id = #{adminId,jdbcType=INTEGER}
-    where price_id = #{priceId,jdbcType=INTEGER}
-  </update>
+<mapper namespace="cn.ccrm.admin.dao.GoodsPriceMapper">
+	<resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.GoodsPrice">
+		<id column="price_id" property="priceId" jdbcType="INTEGER" />
+		<result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+		<result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+		<result column="retail_price" property="retailPrice" jdbcType="INTEGER" />
+		<result column="buy_price" property="buyPrice" jdbcType="INTEGER" />
+		<result column="wholesale_price" property="wholesalePrice"
+			jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="admin_id" property="adminId" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		price_id, goods_id, unit_name, retail_price, buy_price, wholesale_price, state,
+		create_time,
+		update_time, admin_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_goods_price
+		where price_id = #{priceId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_goods_price
+		where price_id = #{priceId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.ccrm.admin.entity.GoodsPrice">
+		insert into sys_goods_price (price_id, goods_id, unit_name,
+		retail_price, buy_price, wholesale_price,
+		state, create_time, update_time,
+		admin_id)
+		values (#{priceId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
+		#{unitName,jdbcType=VARCHAR},
+		#{retailPrice,jdbcType=INTEGER}, #{buyPrice,jdbcType=INTEGER}, #{wholesalePrice,jdbcType=INTEGER},
+		#{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{adminId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.ccrm.admin.entity.GoodsPrice">
+		insert into sys_goods_price
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="priceId != null">
+				price_id,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="unitName != null">
+				unit_name,
+			</if>
+			<if test="retailPrice != null">
+				retail_price,
+			</if>
+			<if test="buyPrice != null">
+				buy_price,
+			</if>
+			<if test="wholesalePrice != null">
+				wholesale_price,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="adminId != null">
+				admin_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="priceId != null">
+				#{priceId,jdbcType=INTEGER},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=INTEGER},
+			</if>
+			<if test="unitName != null">
+				#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="retailPrice != null">
+				#{retailPrice,jdbcType=INTEGER},
+			</if>
+			<if test="buyPrice != null">
+				#{buyPrice,jdbcType=INTEGER},
+			</if>
+			<if test="wholesalePrice != null">
+				#{wholesalePrice,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminId != null">
+				#{adminId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.GoodsPrice">
+		update sys_goods_price
+		<set>
+			<if test="unitName != null">
+				unit_name = #{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="retailPrice != null">
+				retail_price = #{retailPrice,jdbcType=INTEGER},
+			</if>
+			<if test="buyPrice != null">
+				buy_price = #{buyPrice,jdbcType=INTEGER},
+			</if>
+			<if test="wholesalePrice != null">
+				wholesale_price = #{wholesalePrice,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminId != null">
+				admin_id = #{adminId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.GoodsPrice">
+		update sys_goods_price
+		set unit_name = #{unitName,jdbcType=VARCHAR},
+		retail_price = #{retailPrice,jdbcType=INTEGER},
+		buy_price = #{buyPrice,jdbcType=INTEGER},
+		wholesale_price = #{wholesalePrice,jdbcType=INTEGER},
+		state = #{state,jdbcType=TINYINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		admin_id = #{adminId,jdbcType=INTEGER}
+		where goods_id = #{goodsId,jdbcType=INTEGER}
+	</update>
 </mapper>
