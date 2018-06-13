@@ -234,9 +234,9 @@
 
 	<select id="getGoodsList" parameterType="pm" resultType="pm">
 		SELECT
-		a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.menu_name
-		FROM `sys_goods` a LEFT JOIN `sys_menu` b ON a.`category_id` =
-		b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id`
+		a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.category_name
+		FROM `sys_goods` a LEFT JOIN `sys_goods_category` b ON a.`category_id` =
+		b.`category_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id`
 		<where>
 			<if test="category_id != null and category_id != '' ">
 			and a.category_id = #{category_id}

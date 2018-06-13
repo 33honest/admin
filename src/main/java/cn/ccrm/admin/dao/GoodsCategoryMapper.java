@@ -1,17 +1,38 @@
 package cn.ccrm.admin.dao;
 
+import java.util.List;
+
 import cn.ccrm.admin.entity.GoodsCategory;
+import cn.ccrm.admin.entity.Menu;
+import cn.ccrm.admin.util.ParameterMap;
 
 public interface GoodsCategoryMapper {
-    int deleteByPrimaryKey(Integer categoryId);
 
-    int insert(GoodsCategory record);
+	int deleteByPrimaryKey(Integer categoryId);
 
-    int insertSelective(GoodsCategory record);
+	int insert(ParameterMap pm);
 
-    GoodsCategory selectByPrimaryKey(Integer categoryId);
+	int insertSelective(ParameterMap pm);
 
-    int updateByPrimaryKeySelective(GoodsCategory record);
+	GoodsCategory selectByPrimaryKey(Integer categoryId);
 
-    int updateByPrimaryKey(GoodsCategory record);
+	int updateByPrimaryKeySelective(ParameterMap pm);
+
+	int updateByPrimaryKey(ParameterMap pm);
+
+	public List<GoodsCategory> getAllParentMenu(Object obj);
+
+	public List<GoodsCategory> getSubMenuByParentId(long ParentId);
+
+	public long getMaxIdByName();
+
+	public void saveMenu(ParameterMap pm);
+
+	public void delMenu(String menuId);
+
+	public void editMenu(ParameterMap pm);
+
+	public ParameterMap findMenu(String menuId);
+	
+
 }

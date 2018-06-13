@@ -5,21 +5,21 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="index.html" color="#white">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">产品查询</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="index.html" color="#white">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">公司信息</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="/goods/index" method="get">
+                <form action="/article/index" method="get">
                     <table class="search-tab">
                         <tr>
-                            <th width="120">选择分类:</th>
+                            <th width="120">选择栏目:</th>
                             <td>
                                 <select name="category_id" id="category_id">
                                     <option value="">全部</option>
                                     <#list menus as menu>
-                                    <option value="${menu.categoryId}">${menu.categoryName}</option>
+                                    <option value="${menu.MENU_ID}">${menu.MENU_NAME}</option>
                                     <#list menu.subMenu as subMenu>
-                                    <option value="${subMenu.categoryId}">——${subMenu.categoryName}</option>
+                                    <option value="${subMenu.MENU_ID}">——${subMenu.MENU_NAME}</option>
                                     </#list>
                                     </#list>
                                 </select>
@@ -37,9 +37,9 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/goodscategory/index"><i class="icon-font">&#xe006;</i>产品分类</a>
+                    	<a href="/category/index"><i class="icon-font">&#xe006;</i>栏目分类</a>
                         <a id="batchDel" href="javascript:void(0)" onclick="delAllSelectsGoods();"><i class="icon-font"></i>批量删除</a>
-                        <a href="/goods/edit"><i class="icon-font">&#xe008;</i>添加产品</a>
+                        <a href="/article/edit"><i class="icon-font">&#xe008;</i>添加文章</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -47,45 +47,39 @@
                         <tr>
                             <th class="tc" width="5%"></th>
                             <th>产品标题</th>
-                            <th>产品分类</th>
+                            <th>栏目分类</th>
                             <th>添加时间</th>
                             <th>更新时间</th>
-                            <th>上架标记</th>
+                            <th>编辑</th>
                             <th>操作产品</th>
                         </tr>
-                        <#list goodsList as goods>
+                        <#list articleList as article>
                         <tr>
-                            <td class="tc"><input name="goods_id" value="${goods.goods_id}" type="checkbox"></td>
-                            <td><a target="_blank" href="${goods.goods_id}">${goods.goods_name}</a></td>
-                            <td>${goods.category_name}</td>
-                            <td>${goods.create_time}</td>
-                            <td>${goods.update_time}</td>
+                            <td class="tc"><input name="article_id" value="${article.id}" type="checkbox"></td>
+                            <td><a target="_blank" href="${article.id}">${article.title}</a></td>
+                            <td>${article.menu_name}</td>
+                            <td>${article.create_time}</td>
+                            <td>${article.update_time}</td>
+                            <td>${article.username}</td>
                             <td>
-                            <#if goods.is_marketable == 1>
-                            已上架
-                            <#else>
-                            <font style="color:red">未上架</font>
-                            </#if>
-                            </td>
-                            <td>
-                            <a href="/goods/edit?goods_id=${goods.goods_id}" class="btn btn-xs btn-info">修改</a> 
-                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delGoods(${goods.goods_id})"><font>删除</font></span>
+                            <a href="/article/edit?id=${article.id}" class="btn btn-xs btn-info">修改</a> 
+                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delGoods(${article.id})"><font>删除</font></span>
                             </td>
                         </tr>
                         </#list>
                     </table>
                     <div class="list-page">
                     <#if pageInfo.isFirstPage == false>
-                    <a href="/goods/index?pageNum=${pageInfo.navigateFirstPage}&keywords=${keywords}&category_id=${category_id}">首页</a> 
+                    <a href="/article/index?pageNum=${pageInfo.navigateFirstPage}&keywords=${keywords}&category_id=${category_id}">首页</a> 
                     </#if>
                     <#if pageInfo.hasPreviousPage>
-                    <a href="/goods/index?pageNum=${pageInfo.prePage}&keywords=${keywords}&category_id=${category_id}">上一页</a> 
+                    <a href="/article/index?pageNum=${pageInfo.prePage}&keywords=${keywords}&category_id=${category_id}">上一页</a> 
                     </#if>
                     <#if pageInfo.hasNextPage>
-                    <a href="/goods/index?pageNum=${pageInfo.nextPage}&keywords=${keywords}&category_id=${category_id}">下一页</a>
+                    <a href="/article/index?pageNum=${pageInfo.nextPage}&keywords=${keywords}&category_id=${category_id}">下一页</a>
                     </#if>
                     <#if pageInfo.isLastPage == false>
-                    <a href="/goods/index?pageNum=${pageInfo.navigateLastPage}&keywords=${keywords}&category_id=${category_id}">尾页</a> 
+                    <a href="/article/index?pageNum=${pageInfo.navigateLastPage}&keywords=${keywords}&category_id=${category_id}">尾页</a> 
                     </#if>
                     共【${pageInfo.pages}】页，共计【${pageInfo.total}】条，每页【${pageInfo.pageSize}】条
 					</div>
@@ -100,7 +94,7 @@
 var ids = "";
 function delAllSelectsGoods() {
 	var vIds = [];
-	$("input[name='goods_id']:checkbox").each(function(index) {
+	$("input[name='article_id']:checkbox").each(function(index) {
 	    if ($(this).prop("checked") === true) {
 	        vIds.push($(this).val());
 	    }
@@ -115,8 +109,8 @@ function delGoods(id){
 	  if(confirm("你确定要删除吗？")){
 		  $.ajax({
 			  type:"POST",		  
-			  url:"/goods/del",
-			  data:{time:new Date(),goods_id:id},
+			  url:"/article/del",
+			  data:{time:new Date(),id:id},
 			  dataType:"json",
 			  cache:false,
 			  success:function(data){

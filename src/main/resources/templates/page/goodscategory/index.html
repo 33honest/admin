@@ -6,14 +6,14 @@
 
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="index.html" color="#white">首页</a><span
-					class="crumb-step">&gt;</span><span class="crumb-name">公司信息</span><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+					class="crumb-step">&gt;</span><span class="crumb-name">产品管理</span><span class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span></div>
         </div>
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/category/index"><i class="icon-font"></i>栏目管理</a>
-                        <a href="/category/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
+                    	<a href="/goodscategory/index"><i class="icon-font"></i>分类管理</a>
+                        <a href="/goodscategory/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -22,30 +22,26 @@
                             <th class="tc" width="5%"></th>
                             <th>标签ID</th>
                             <th>菜单名称</th>
-                            <th>菜单地址</th>
-                            <th>菜单排序</th>
                             <th>菜单操作</th>
                         </tr>
                         <#list menus as menu>
                         <tr>
                             <td class="tc"><input name="id[]" value="" type="checkbox"></td>
-                            <td>${menu.MENU_ID}</td>
-                            <td>${menu.MENU_NAME}</td>
-                            <td>${menu.MENU_URL}</td>
-                            <td>${menu.MENU_ORDER}</td>
-                            <td><a href="/category/edit?menu_id=${menu.MENU_ID}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span>
-                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.MENU_ID})"><font>删除</font></span>
+                            <td>${menu.categoryId}</td>
+                            <td>${menu.categoryName}</td>
+                            <td><a href="/goodscategory/edit?menu_id=${menu.category_id}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.categoryId}"><font>展开</font></span>
+                             <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.category_id})"><font>删除</font></span>
                             </td>
                         </tr>
                         </#list>
                     </table>
-                    <div class="list-page"></div>
+                    <div class="list-page"> </div>
                 </div>
             </form>
         </div>
     </div>
     <!--/main-->
 </div>
-<script type="text/javascript" src="/js/menu.js"></script>
+<script type="text/javascript" src="/js/goodsmenu.js"></script>
 </body>
 </html>

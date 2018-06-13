@@ -16,27 +16,22 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.ccrm.admin.common.CommonConst;
-import cn.ccrm.admin.service.IGoodsCategory;
-import cn.ccrm.admin.service.IGoodsPriceService;
-import cn.ccrm.admin.service.IGoodsService;
+import cn.ccrm.admin.service.IArticleService;
 import cn.ccrm.admin.service.IMenuService;
 import cn.ccrm.admin.util.ParameterMap;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/goods")
-public class GoodsController extends BaseController {
+@RequestMapping("/article")
+public class ArticleController extends BaseController {
 	
-	private String menuUrl = "goods";
-	
-	@Autowired
-	private IGoodsCategory menuService;
+	private String menuUrl = "article";
 	
 	@Autowired
-	private IGoodsService goodsService;
+	private IMenuService menuService;
 	
 	@Autowired
-	private IGoodsPriceService goodsPriceService;
+	private IArticleService articleService;
 	
 	@RequestMapping("/index")
 	public String index(ModelMap model) {
@@ -54,38 +49,38 @@ public class GoodsController extends BaseController {
 		}
 		
 		PageHelper.startPage(pageNum , CommonConst.PAGE_SIZE);
-		List<ParameterMap> goodsList = goodsService.getGoodsList(this.getParameterMap());
-		PageInfo pageInfo = new PageInfo<>(goodsList);
+		List<ParameterMap> articleList = articleService.getArticleList(this.getParameterMap());
+		PageInfo pageInfo = new PageInfo<>(articleList);
 		System.out.println(pageInfo);
 		
-		model.addAttribute("goodsList", goodsList);
+		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("keywords", keywords);
 		model.addAttribute("category_id", category_id);
 		
-		return CommonConst.VIEWPREFIX_NAME + "goods/index";
+		return CommonConst.VIEWPREFIX_NAME + "article/index";
 	}
 	
 	@RequestMapping("/edit")
 	public String edit(ModelMap model) {
 		
 		model.addAttribute("menus", menuService.getAllMenuList());
-		HashMap<String, Object> goodsInfo = goodsService.queryGoodsInfoById(this.getParameterMap());
-		model.addAttribute("goodsInfo", goodsInfo.get("data"));
+		HashMap<String, Object> goodsInfo = articleService.queryArticleInfoById(this.getParameterMap());
+		model.addAttribute("article", goodsInfo.get("data"));
 		
-		return CommonConst.VIEWPREFIX_NAME + "goods/edit";
+		return CommonConst.VIEWPREFIX_NAME + "article/edit";
 	}
 	
 	@RequestMapping("/save")
 	@ResponseBody
 	public Object save() {
-		return goodsService.add(this.getParameterMap(), this.getSession());
+		return articleService.add(this.getParameterMap(), this.getSession());
 	}
 	
 	@RequestMapping("/del")
 	@ResponseBody
 	public Object del() {
-		return goodsService.del(this.getParameterMap());
+		return articleService.del(this.getParameterMap());
 	}
 	
 }

@@ -6,9 +6,8 @@
 		<div class="crumb-wrap">
 			<div class="crumb-list">
 				<i class="icon-font"></i><a href="index.html" color="#white">首页</a><span
-					class="crumb-step">&gt;</span><span class="crumb-name">公司信息</span><span
-					class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span><span
-					class="crumb-step">&gt;</span><span class="crumb-name">编辑栏目</span>
+					class="crumb-step">&gt;</span><span class="crumb-name">产品管理</span><span
+					class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span>
 			</div>
 		</div>
 
@@ -16,8 +15,8 @@
 		<div class="result-wrap">
 			<div class="result-content">
 				<form method="post" id="myform" name="myform" >
-					<input type="hidden" name="menu_id" value="${menuDetail.menu_id}" />
-					<input type="hidden" name="actionurl" value="/category/save"/>
+					<input type="hidden" name="category_id" value="${menuDetail.category_id}" />
+					<input type="hidden" name="actionurl" value="/goodscategory/save"/>
 					<table class="insert-tab" width="100%">
 						<tbody>
 							<tr>
@@ -25,27 +24,20 @@
 								<td><select name="parent_id" id="parent_id" class="required">
 										<option value="0">请选择</option>
 										<#list menus as menu>
-										<option value="${menu.MENU_ID}" <#if menuDetail.parent_id == menu.MENU_ID > selected="selected"</#if>>${menu.MENU_NAME}</option>
+										<option value="${menu.categoryId}" <#if menuDetail.parent_id == menu.categoryId > selected="selected"</#if>>${menu.categoryName}</option>
 										</#list>
 								</select></td>
 							</tr>
 							<tr>
 								<th><i class="require-red">*</i>菜单名称：</th>
 								<td>
-								<input class="common-text required" id="menu_name"
-									name="menu_name" size="50" value="${menuDetail.menu_name}" type="text"></td>
+								<input class="common-text required" id="category_name"
+									name="category_name" size="50" value="${menuDetail.category_name}" type="text"></td>
 							</tr>
 							<tr>
-								<th><i class="require-red">*</i>菜单地址：</th>
+								<th><i class="require-red"></i>简要描述：</th>
 								<td>
-								<input class="common-text required" id="menu_url"
-									name="menu_url" size="50" value="${menuDetail.menu_url}" type="text"></td>
-							</tr>
-							<tr>
-								<th><i class="require-red">*</i>菜单排序：</th>
-								<td>
-								<input class="common-text required" id="sort_num"
-									name="sort_num" size="50" value="${menuDetail.sort_num}" type="text"></td>
+								<textarea name="simple_describe" class="common-textarea" id="simple_describe" style="margin: 0px; width: 588px; height: 108px;">${menuDetail.simple_describe}</textarea></td>
 							</tr>
 							<tr>
 								<th></th>
@@ -63,6 +55,6 @@
 	<!-- end -->
 </div>
 <!--/main-->
-<script type="text/javascript" src="/js/menu.js"></script>
+<script type="text/javascript" src="/js/goodsmenu.js"></script>
 </body>
 </html>

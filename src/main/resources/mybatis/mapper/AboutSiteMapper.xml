@@ -1,210 +1,333 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.ccrm.admin.dao.AboutSiteMapper" >
-  <resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.AboutSite" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
-    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
-    <result column="thumb" property="thumb" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="delf" property="delf" jdbcType="INTEGER" />
-    <result column="hits" property="hits" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.ccrm.admin.entity.AboutSite" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, category_id, title, key_words, introduction, thumb, create_time, update_time, 
-    user_id, delf, hits, status
-  </sql>
-  <sql id="Blob_Column_List" >
-    content
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from sys_about_site
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sys_about_site
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.ccrm.admin.entity.AboutSite" >
-    insert into sys_about_site (id, category_id, title, 
-      key_words, introduction, thumb, 
-      create_time, update_time, user_id, 
-      delf, hits, status, 
-      content)
-    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{keyWords,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
-      #{delf,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.ccrm.admin.entity.AboutSite" >
-    insert into sys_about_site
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="categoryId != null" >
-        category_id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="keyWords != null" >
-        key_words,
-      </if>
-      <if test="introduction != null" >
-        introduction,
-      </if>
-      <if test="thumb != null" >
-        thumb,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="delf != null" >
-        delf,
-      </if>
-      <if test="hits != null" >
-        hits,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="keyWords != null" >
-        #{keyWords,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null" >
-        #{introduction,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null" >
-        #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="delf != null" >
-        #{delf,jdbcType=INTEGER},
-      </if>
-      <if test="hits != null" >
-        #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.AboutSite" >
-    update sys_about_site
-    <set >
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="keyWords != null" >
-        key_words = #{keyWords,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null" >
-        introduction = #{introduction,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null" >
-        thumb = #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="delf != null" >
-        delf = #{delf,jdbcType=INTEGER},
-      </if>
-      <if test="hits != null" >
-        hits = #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ccrm.admin.entity.AboutSite" >
-    update sys_about_site
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      key_words = #{keyWords,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      user_id = #{userId,jdbcType=INTEGER},
-      delf = #{delf,jdbcType=INTEGER},
-      hits = #{hits,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.AboutSite" >
-    update sys_about_site
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      key_words = #{keyWords,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      user_id = #{userId,jdbcType=INTEGER},
-      delf = #{delf,jdbcType=INTEGER},
-      hits = #{hits,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="cn.ccrm.admin.dao.AboutSiteMapper">
+	<resultMap id="BaseResultMap" type="cn.ccrm.admin.entity.AboutSite">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="category_id" property="categoryId" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="introduction" property="introduction" jdbcType="VARCHAR" />
+		<result column="thumb" property="thumb" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="delf" property="delf" jdbcType="INTEGER" />
+		<result column="hits" property="hits" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.ccrm.admin.entity.AboutSite"
+		extends="BaseResultMap">
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, category_id, title, key_words, introduction, thumb, create_time,
+		update_time,
+		user_id, delf, hits, status
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" resultType="pm" parameterType="pm">
+		select * from sys_about_site where id = #{id}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_about_site
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.ccrm.admin.entity.AboutSite">
+		insert into sys_about_site (id, category_id, title,
+		key_words, introduction, thumb,
+		create_time, update_time, user_id,
+		delf, hits, status,
+		content)
+		values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{keyWords,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{userId,jdbcType=INTEGER},
+		#{delf,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.ccrm.admin.entity.AboutSite">
+		insert into sys_about_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="keyWords != null">
+				key_words,
+			</if>
+			<if test="introduction != null">
+				introduction,
+			</if>
+			<if test="thumb != null">
+				thumb,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="delf != null">
+				delf,
+			</if>
+			<if test="hits != null">
+				hits,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWords != null">
+				#{keyWords,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="thumb != null">
+				#{thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="delf != null">
+				#{delf,jdbcType=INTEGER},
+			</if>
+			<if test="hits != null">
+				#{hits,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.ccrm.admin.entity.AboutSite">
+		update sys_about_site
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWords != null">
+				key_words = #{keyWords,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				introduction = #{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="thumb != null">
+				thumb = #{thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="delf != null">
+				delf = #{delf,jdbcType=INTEGER},
+			</if>
+			<if test="hits != null">
+				hits = #{hits,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="pm">
+		update sys_about_site
+		set 
+		category_id = #{category_id},
+		title = #{title},
+		<if test="key_words != null">
+		key_words = #{key_words},
+		</if>
+		introduction = #{introduction},
+		thumb = #{thumb},
+		update_time = #{update_time},
+		<if test="user_id != null">
+		user_id = #{user_id},
+		</if>
+		<if test="delf != null">
+		delf = #{delf},
+		</if>
+		<if test="hits != null">
+		hits = #{hits},
+		</if>
+		<if test="status != null">
+		status = #{status},
+		</if>
+		<if test="content != null">
+		content = #{content}
+		</if>
+		where id = #{id}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.ccrm.admin.entity.AboutSite">
+		update sys_about_site
+		set category_id = #{categoryId,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		key_words = #{keyWords,jdbcType=VARCHAR},
+		introduction = #{introduction,jdbcType=VARCHAR},
+		thumb = #{thumb,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		user_id = #{userId,jdbcType=INTEGER},
+		delf = #{delf,jdbcType=INTEGER},
+		hits = #{hits,jdbcType=INTEGER},
+		status = #{status,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getArticleList" parameterType="pm" resultType="pm">
+		SELECT
+		a.id,a.`title`,a.`create_time`,a.`update_time`,a.hits,c.`username`,b.menu_name
+		FROM `sys_about_site` a LEFT JOIN `sys_menu` b ON a.`category_id` =
+		b.`menu_id` LEFT JOIN `sys_user` c ON a.`user_id` = c.`user_id`
+		<where>
+			<if test="category_id != null and category_id != '' ">
+			and a.category_id = #{category_id}
+			</if>
+			<if test="keywords != null and keywords != '' ">
+			and a.title like CONCAT(CONCAT('%',#{keywords}),'%')
+			</if>
+		</where>
+		 ORDER
+		BY a.id DESC
+	</select>
+	
+	<insert id="saveArticle" parameterType="pm">
+		insert into sys_about_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="category_id != null">
+				category_id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="key_words != null">
+				key_words,
+			</if>
+			<if test="introduction != null">
+				introduction,
+			</if>
+			<if test="thumb != null">
+				thumb,
+			</if>
+			<if test="create_time != null">
+				create_time,
+			</if>
+			<if test="update_time != null">
+				update_time,
+			</if>
+			<if test="user_id != null">
+				user_id,
+			</if>
+			<if test="delf != null">
+				delf,
+			</if>
+			<if test="hits != null">
+				hits,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="category_id != null">
+				#{category_id},
+			</if>
+			<if test="title != null">
+				#{title},
+			</if>
+			<if test="key_words != null">
+				#{key_words},
+			</if>
+			<if test="introduction != null">
+				#{introduction},
+			</if>
+			<if test="thumb != null">
+				#{thumb},
+			</if>
+			<if test="create_time != null">
+				#{create_time},
+			</if>
+			<if test="update_time != null">
+				#{update_time},
+			</if>
+			<if test="user_id != null">
+				#{user_id},
+			</if>
+			<if test="delf != null">
+				#{delf},
+			</if>
+			<if test="hits != null">
+				#{hits},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="content != null">
+				#{content},
+			</if>
+		</trim>
+	</insert>
+	
+	<delete id="deleteArticle" parameterType="pm">
+		delete from sys_about_site where id in
+		<foreach item="itemId" collection="id" open="("
+			separator="," close=")">
+			#{itemId}
+		</foreach>
+	</delete>
+	
 </mapper>

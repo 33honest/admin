@@ -1,105 +1,126 @@
 package cn.ccrm.admin.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class GoodsCategory {
-    private Integer categoryId;
+	private Integer categoryId;
 
-    private Integer parentId;
+	private Integer parentId;
 
-    private String categoryName;
+	private String categoryName;
 
-    private String image;
+	private String image;
 
-    private Byte state;
+	private Byte state;
 
-    private String simpleDescribe;
+	private String simpleDescribe;
 
-    private Byte recommend;
+	private Byte recommend;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Date updateTime;
+	private Date updateTime;
 
-    private Integer adminId;
+	private Integer adminId;
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
+	private List<GoodsCategory> subMenu;
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
+	private boolean hasMenu = false;
 
-    public Integer getParentId() {
-        return parentId;
-    }
+	public boolean isHasMenu() {
+		return hasMenu;
+	}
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+	public void setHasMenu(boolean hasMenu) {
+		this.hasMenu = hasMenu;
+	}
 
-    public String getCategoryName() {
-        return categoryName;
-    }
+	public List<GoodsCategory> getSubMenu() {
+		return subMenu;
+	}
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
-    }
+	public void setSubMenu(List<GoodsCategory> subMenu) {
+		this.subMenu = subMenu;
+	}
 
-    public String getImage() {
-        return image;
-    }
+	public Integer getCategoryId() {
+		return categoryId;
+	}
 
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public Byte getState() {
-        return state;
-    }
+	public Integer getParentId() {
+		return parentId;
+	}
 
-    public void setState(Byte state) {
-        this.state = state;
-    }
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
-    public String getSimpleDescribe() {
-        return simpleDescribe;
-    }
+	public String getCategoryName() {
+		return categoryName;
+	}
 
-    public void setSimpleDescribe(String simpleDescribe) {
-        this.simpleDescribe = simpleDescribe == null ? null : simpleDescribe.trim();
-    }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName == null ? null : categoryName.trim();
+	}
 
-    public Byte getRecommend() {
-        return recommend;
-    }
+	public String getImage() {
+		return image;
+	}
 
-    public void setRecommend(Byte recommend) {
-        this.recommend = recommend;
-    }
+	public void setImage(String image) {
+		this.image = image == null ? null : image.trim();
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Byte getState() {
+		return state;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setState(Byte state) {
+		this.state = state;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public String getSimpleDescribe() {
+		return simpleDescribe;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setSimpleDescribe(String simpleDescribe) {
+		this.simpleDescribe = simpleDescribe == null ? null : simpleDescribe.trim();
+	}
 
-    public Integer getAdminId() {
-        return adminId;
-    }
+	public Byte getRecommend() {
+		return recommend;
+	}
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-    }
+	public void setRecommend(Byte recommend) {
+		this.recommend = recommend;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 }
