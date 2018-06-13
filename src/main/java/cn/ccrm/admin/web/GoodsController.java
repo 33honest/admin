@@ -9,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+
 import cn.ccrm.admin.common.CommonConst;
 import cn.ccrm.admin.service.IGoodsPriceService;
 import cn.ccrm.admin.service.IGoodsService;
@@ -36,6 +38,7 @@ public class GoodsController extends BaseController {
 		
 		model.addAttribute("menus", menuService.getAllMenuList());
 		
+		PageHelper.startPage(1,CommonConst.PAGE_SIZE);
 		List<ParameterMap> goodsList = goodsService.getGoodsList(null);
 		
 		model.addAttribute("goodsList", goodsList);
