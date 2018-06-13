@@ -9,12 +9,12 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="/goods/index" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="120">选择分类:</th>
                             <td>
-                                <select name="search-sort" id="">
+                                <select name="category_id" id="category_id">
                                     <option value="">全部</option>
                                     <#list menus as menu>
                                     <option value="${menu.MENU_ID}">${menu.MENU_NAME}</option>
@@ -25,7 +25,7 @@
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="${keywords}" id="keywords" type="text"></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
                         </tr>
                     </table>
@@ -73,7 +73,21 @@
                         </tr>
                         </#list>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                    <#if pageInfo.isFirstPage == false>
+                    <a href="/goods/index?pageNum=${pageInfo.navigateFirstPage}&keywords=${keywords}&category_id=${category_id}">首页</a> 
+                    </#if>
+                    <#if pageInfo.hasPreviousPage>
+                    <a href="/goods/index?pageNum=${pageInfo.prePage}&keywords=${keywords}&category_id=${category_id}">上一页</a> 
+                    </#if>
+                    <#if pageInfo.hasNextPage>
+                    <a href="/goods/index?pageNum=${pageInfo.nextPage}&keywords=${keywords}&category_id=${category_id}">下一页</a>
+                    </#if>
+                    <#if pageInfo.isLastPage == false>
+                    <a href="/goods/index?pageNum=${pageInfo.navigateLastPage}&keywords=${keywords}&category_id=${category_id}">尾页</a> 
+                    </#if>
+                    共【${pageInfo.pages}】页，共计【${pageInfo.total}】条，每页【${pageInfo.pageSize}】条
+					</div>
                 </div>
             </form>
         </div>

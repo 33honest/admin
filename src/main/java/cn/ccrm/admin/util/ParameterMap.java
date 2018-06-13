@@ -9,8 +9,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.ccrm.admin.plugin.Page;
-
 @SuppressWarnings("rawtypes")
 public class ParameterMap extends HashMap implements Map {
 
@@ -23,6 +21,7 @@ public class ParameterMap extends HashMap implements Map {
 		map = new HashMap();
 	}
 
+	/*
 	public ParameterMap(Page page) {
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("currentPage", page.getCurrentPage());
@@ -31,6 +30,7 @@ public class ParameterMap extends HashMap implements Map {
 		pageMap.put("showCount", page.getShowCount());
 		map = pageMap;
 	}
+	*/
 
 	@SuppressWarnings("unchecked")
 	public ParameterMap(HttpServletRequest request) {

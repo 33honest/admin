@@ -236,7 +236,16 @@
 		SELECT
 		a.goods_id,a.`goods_name`,a.`create_time`,a.`update_time`,a.`is_marketable`,c.`username`,b.menu_name
 		FROM `sys_goods` a LEFT JOIN `sys_menu` b ON a.`category_id` =
-		b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id` ORDER
+		b.`menu_id` LEFT JOIN `sys_user` c ON a.`admin_id` = c.`user_id`
+		<where>
+			<if test="category_id != null and category_id != '' ">
+			and a.category_id = #{category_id}
+			</if>
+			<if test="keywords != null and keywords != '' ">
+			and a.goods_name like CONCAT(CONCAT('%',#{keywords}),'%')
+			</if>
+		</where>
+		 ORDER
 		BY a.goods_id DESC
 	</select>
 
