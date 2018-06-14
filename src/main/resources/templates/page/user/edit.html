@@ -1,0 +1,90 @@
+<#include "common/head.html">
+<div class="container clearfix">
+	<#include "common/menu.html">
+	<div class="main-wrap">
+
+		<div class="crumb-wrap">
+			<div class="crumb-list">
+				<i class="icon-font"></i><a href="index.html" color="#white">首页</a><span
+					class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span><span
+					class="crumb-step">&gt;</span><span class="crumb-name">添加/修改用户</span>
+			</div>
+		</div>
+
+		<!-- begin -->
+		<div class="result-wrap">
+			<div class="result-content">
+				<form method="post" id="myform" name="myform" >
+					<input type="hidden" name="user_id" value="${userInfo.user_id}" />
+					<input type="hidden" name="actionurl" value="/user/save"/>
+					<table class="insert-tab" width="100%">
+						<tbody>
+							<tr>
+								<th><i class="require-red">*</i>登录账号：</th>
+								<td>
+								<input class="common-text required" id="username"
+									name="username" size="50" value="${userInfo.username}" type="text"></td>
+							</tr>
+							<tr>
+								<th><i class="require-red">*</i>账号密码：</th>
+								<td>
+								<input class="common-text required" id="password"
+									name="password" size="50" value="" type="text"></td>
+							</tr>
+							<tr>
+								<th>账号昵称：</th>
+								<td>
+								<input class="common-text required" id="nick_name"
+									name="nick_name" size="50" value="${userInfo.nick_name}" type="text"></td>
+							</tr>
+							<tr>
+								<th><i class="require-red">*</i>状态：</th>
+								<td>
+								<input type="radio" name="status" value="unlock" <#if userInfo.status == "unlock"> checked="checked" </#if> /> 正常 
+								<input type="radio" name="status" value="lock" <#if userInfo.status == "lock"> checked="checked" </#if> /> 禁用</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td><input class="btn btn-primary btn6 mr10" value="提交"
+									type="button"  id="submitBtn" /> <input class="btn btn6"
+									onclick="history.go(-1)" value="返回" type="button"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<!-- end -->
+</div>
+<!--/main-->
+<script type="text/javascript">
+$(function () {
+    $("#submitBtn").click(function(){
+    	var user_id = $("input[name='user_id']").val();
+    	var actionUrl = $("input[name='actionurl']").val();
+    	var username = $("input[name='username']").val();
+    	var password = $("input[name='password']").val();
+    	var nick_name = $("input[name='nick_name']").val();
+    	var status= $("input[name='status']:checked").val();
+    	$.ajax({
+    		type:"POST",
+    		url:actionUrl,
+    		data:{user_id:user_id,username:username,password:password,nick_name:nick_name,status:status},
+    		dataType:"json",
+    		cache:false,
+    		success:function(data){
+    			if(data.status == 'success'){
+    				window.location.href=window.location.href;
+    			}else{
+    				alert(data.data);
+    			}
+    		}
+    	});
+    	
+    });
+});
+</script>
+</body>
+</html>

@@ -17,4 +17,12 @@ public interface IUserService {
 	
 	public HashMap<String, Object> getRole(ParameterMap pm);
 	
+	public HashMap<String, Object> saveUser(ParameterMap pm);
+	
+	public HashMap<String, Object> getUserInfoByUserId(ParameterMap pm);
+	
+	public HashMap<String, Object> delUser(ParameterMap pm);
+	
+	
+	
 }

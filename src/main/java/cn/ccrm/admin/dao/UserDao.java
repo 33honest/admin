@@ -16,4 +16,5 @@ public interface UserDao {
 	public void editUser(ParameterMap pm);
 	public void delUser(String userId);
 	public void delUserRole(String userId);
+	public ParameterMap getUserInfoByUserId(ParameterMap pm);
 }
