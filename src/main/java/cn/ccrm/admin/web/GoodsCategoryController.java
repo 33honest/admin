@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ccrm.admin.common.CommonConst;
 import cn.ccrm.admin.entity.GoodsCategory;
-import cn.ccrm.admin.entity.Menu;
 import cn.ccrm.admin.service.IGoodsCategory;
-import cn.ccrm.admin.service.IMenuService;
-import cn.ccrm.admin.util.Tools;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
@@ -51,7 +48,6 @@ public class GoodsCategoryController extends BaseController {
 				menu = (Map<String, Object>) findMenuRest.get("data");
 			}
 		}
-		System.out.println(menu);
 		model.addAttribute("menuDetail", menu);
 		
 		return CommonConst.VIEWPREFIX_NAME + "goodscategory/edit";
