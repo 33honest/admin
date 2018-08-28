@@ -79,7 +79,7 @@ public class GoodsCategoryServiceImpl implements IGoodsCategory{
 				newId = menuDao.getMaxIdByName();
 			} catch (Exception e) {}
 			
-			String userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
+			int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			pm.put("category_id", newId+1);
 			pm.put("admin_id", userId);
 			pm.put("create_time", DateUtil.getTime());

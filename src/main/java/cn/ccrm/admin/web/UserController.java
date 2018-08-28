@@ -23,7 +23,7 @@ import cn.ccrm.admin.util.Tools;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class UserController extends BaseController {
 
 	private String menuUrl = "user/index";

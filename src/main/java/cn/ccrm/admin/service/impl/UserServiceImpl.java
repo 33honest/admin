@@ -16,6 +16,7 @@ import cn.ccrm.admin.entity.Const;
 import cn.ccrm.admin.entity.ReturnModel;
 import cn.ccrm.admin.entity.User;
 import cn.ccrm.admin.enums.StatusCodeEnum;
+import cn.ccrm.admin.repository.UserRepository;
 import cn.ccrm.admin.service.IUserService;
 import cn.ccrm.admin.util.DateUtil;
 import cn.ccrm.admin.util.ParameterMap;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -50,7 +54,7 @@ public class UserServiceImpl implements IUserService {
 				if("lock".equals(userInfo.getStatus())) {
 					return ReturnModel.getModel(StatusCodeEnum.STATUS_4003.getCode(), "fail", StatusCodeEnum.STATUS_4003.getMsg());
 				}
-				String userId = userInfo.getUserId();
+				int userId = userInfo.getUserId();
 				
 				session.setAttribute(Const.SESSION_USER, userInfo);
 				userDao.saveLoginTime(userId);
@@ -141,6 +145,18 @@ public class UserServiceImpl implements IUserService {
 			return ReturnModel.getModel(StatusCodeEnum.STATUS_4016.getCode(), "failed", StatusCodeEnum.STATUS_4016.getMsg());
 		}
 		return ReturnModel.getModel(StatusCodeEnum.STATUS_0000.getCode(), "success", null);
+	}
+
+	@Override
+	public User getUserById(Integer id) {
+		
+		try {
+			User user = userRepository.getUserById(id);
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

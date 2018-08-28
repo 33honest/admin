@@ -1,66 +1,56 @@
 package cn.ccrm.admin.entity;
 
-import java.math.BigInteger;
-/**
- * 用户的最后拥有的角色
- * @author tyro
- *
- */
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "sys_user_role")
 public class UserRole {
-	private BigInteger rights;
-	private BigInteger adds_qx;
-	private BigInteger edits_qx;
-	private BigInteger dels_qx;
-	private BigInteger querys_qx;
-	public BigInteger getRights() {
-		return rights;
+
+	@Id
+	private int id;
+	private int user_id;
+	private int role_id;
+	private Date create_time;
+
+	public int getId() {
+		return id;
 	}
-	public void setRights(BigInteger rights) {
-		this.rights = rights;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public BigInteger getAdds_qx() {
-		return adds_qx;
+
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setAdds_qx(BigInteger adds_qx) {
-		this.adds_qx = adds_qx;
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
-	public BigInteger getEdits_qx() {
-		return edits_qx;
+
+	public int getRole_id() {
+		return role_id;
 	}
-	public void setEdits_qx(BigInteger edits_qx) {
-		this.edits_qx = edits_qx;
+
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
-	public BigInteger getDels_qx() {
-		return dels_qx;
+
+	public Date getCreate_time() {
+		return create_time;
 	}
-	public void setDels_qx(BigInteger dels_qx) {
-		this.dels_qx = dels_qx;
+
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
-	public BigInteger getQuerys_qx() {
-		return querys_qx;
-	}
-	public void setQuerys_qx(BigInteger querys_qx) {
-		this.querys_qx = querys_qx;
-	}
-	public UserRole() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public UserRole(BigInteger rights, BigInteger adds_qx, BigInteger edits_qx, BigInteger dels_qx,
-			BigInteger querys_qx) {
-		super();
-		this.rights = rights;
-		this.adds_qx = adds_qx;
-		this.edits_qx = edits_qx;
-		this.dels_qx = dels_qx;
-		this.querys_qx = querys_qx;
-	}
+
 	@Override
 	public String toString() {
-		return "UserRole [rights=" + rights + ", adds_qx=" + adds_qx + ", edits_qx=" + edits_qx + ", dels_qx=" + dels_qx
-				+ ", querys_qx=" + querys_qx + "]";
+		return "UserRole [id=" + id + ", user_id=" + user_id + ", role_id=" + role_id + ", create_time=" + create_time + "]";
 	}
-	
-	
-	
+
 }

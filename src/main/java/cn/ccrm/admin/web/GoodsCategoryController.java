@@ -18,7 +18,7 @@ import cn.ccrm.admin.service.IGoodsCategory;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/goodscategory")
+@RequestMapping("/admin/goodscategory")
 public class GoodsCategoryController extends BaseController {
 	
 	private String menuUrl = "goodscategory/index";

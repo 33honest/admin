@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import cn.ccrm.admin.entity.User;
 import cn.ccrm.admin.util.ParameterMap;
 
 public interface IUserService {
@@ -22,6 +23,8 @@ public interface IUserService {
 	public HashMap<String, Object> getUserInfoByUserId(ParameterMap pm);
 	
 	public HashMap<String, Object> delUser(ParameterMap pm);
+	
+	public User getUserById(Integer id);
 	
 	
 	

@@ -24,7 +24,7 @@ import cn.ccrm.admin.util.ParameterMap;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/goods")
+@RequestMapping("/admin/goods")
 public class GoodsController extends BaseController {
 	
 	private String menuUrl = "goods";

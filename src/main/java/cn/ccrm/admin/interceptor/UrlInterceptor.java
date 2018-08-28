@@ -22,10 +22,12 @@ public class UrlInterceptor implements HandlerInterceptor {
 		logger.debug("访问路径:{}", request.getRequestURI());
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(Const.SESSION_USER);
+		/*
 		if(null == user) {
 			response.sendRedirect("/login.htm");
 			return false;
 		}
+		*/
 		return true;
 	}
 

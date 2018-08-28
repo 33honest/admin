@@ -57,7 +57,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
 		try {
 			String pics = pm.getString("thumb");
-			String userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
+			int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			if (Tools.notEmpty(pics)) {
 				if(pics.indexOf("ta:image") > 0) {
 					pics = replaceBase64Before(pics);

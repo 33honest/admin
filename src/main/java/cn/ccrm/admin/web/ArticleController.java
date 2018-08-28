@@ -22,10 +22,8 @@ import cn.ccrm.admin.util.ParameterMap;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/admin/article")
 public class ArticleController extends BaseController {
-	
-	private String menuUrl = "article";
 	
 	@Autowired
 	private IMenuService menuService;

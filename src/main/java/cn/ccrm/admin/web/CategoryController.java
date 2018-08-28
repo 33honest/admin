@@ -19,7 +19,7 @@ import cn.ccrm.admin.util.Tools;
 import cn.ccrm.admin.web.base.BaseController;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/admin/category")
 public class CategoryController extends BaseController {
 	
 	private String menuUrl = "category/index";
