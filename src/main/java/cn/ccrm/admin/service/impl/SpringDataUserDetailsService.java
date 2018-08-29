@@ -43,7 +43,6 @@ public class SpringDataUserDetailsService implements UserDetailsService {
 		roles.add(new SimpleGrantedAuthority(roleInfo.getRoleName()));
 		
 		UserDetails userDetails = new org.springframework.security.core.userdetails.User(username, userEntity.getPassword(), roles);
-		System.out.println(userDetails.getAuthorities());
 		
 		return userDetails;
 	}

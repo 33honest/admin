@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,16 +19,9 @@ import com.alibaba.druid.util.Base64;
 
 import cn.ccrm.admin.config.PropertiesConfig;
 import cn.ccrm.admin.dao.AboutSiteMapper;
-import cn.ccrm.admin.dao.GoodsMapper;
-import cn.ccrm.admin.dao.GoodsPriceMapper;
-import cn.ccrm.admin.entity.Const;
-import cn.ccrm.admin.entity.Goods;
-import cn.ccrm.admin.entity.GoodsPrice;
 import cn.ccrm.admin.entity.ReturnModel;
-import cn.ccrm.admin.entity.User;
 import cn.ccrm.admin.enums.StatusCodeEnum;
 import cn.ccrm.admin.service.IArticleService;
-import cn.ccrm.admin.service.IGoodsService;
 import cn.ccrm.admin.util.DateUtil;
 import cn.ccrm.admin.util.ImgUtil;
 import cn.ccrm.admin.util.ParameterMap;
@@ -55,7 +47,7 @@ public class ArticleServiceImpl implements IArticleService {
 	public HashMap<String, Object> add(ParameterMap pm, HttpSession session) {
 		try {
 			String pics = pm.getString("thumb");
-			int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
+			//int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			if (Tools.notEmpty(pics)) {
 				if (pics.indexOf("ta:image") > 0) {
 					pics = replaceBase64Before(pics);
@@ -69,7 +61,7 @@ public class ArticleServiceImpl implements IArticleService {
 				}
 			}
 			String id = pm.getString("id");
-			pm.put("user_id", userId);
+			//pm.put("user_id", userId);
 			if (StringUtils.isNoneBlank(id)) {
 				pm.put("update_time", DateUtil.getTime());
 				siteDao.updateByPrimaryKeyWithBLOBs(pm);

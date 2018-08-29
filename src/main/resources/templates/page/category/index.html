@@ -12,8 +12,8 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/category/index"><i class="icon-font"></i>栏目管理</a>
-                        <a href="/category/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
+                    	<a href="/admin/category/index"><i class="icon-font"></i>栏目管理</a>
+                        <a href="/admin/category/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -33,7 +33,7 @@
                             <td>${menu.MENU_NAME}</td>
                             <td>${menu.MENU_URL}</td>
                             <td>${menu.MENU_ORDER}</td>
-                            <td><a href="/category/edit?menu_id=${menu.MENU_ID}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span>
+                            <td><a href="/admin/category/edit?menu_id=${menu.MENU_ID}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.MENU_ID}"><font>展开</font></span>
                              <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.MENU_ID})"><font>删除</font></span>
                             </td>
                         </tr>

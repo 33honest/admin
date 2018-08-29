@@ -9,7 +9,7 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="/goods/index" method="get">
+                <form action="/admin/goods/index" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="120">选择分类:</th>
@@ -37,9 +37,9 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/goodscategory/index"><i class="icon-font">&#xe006;</i>产品分类</a>
+                    	<a href="/admin/goodscategory/index"><i class="icon-font">&#xe006;</i>产品分类</a>
                         <a id="batchDel" href="javascript:void(0)" onclick="delAllSelectsGoods();"><i class="icon-font"></i>批量删除</a>
-                        <a href="/goods/edit"><i class="icon-font">&#xe008;</i>添加产品</a>
+                        <a href="/admin/goods/edit"><i class="icon-font">&#xe008;</i>添加产品</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -68,7 +68,7 @@
                             </#if>
                             </td>
                             <td>
-                            <a href="/goods/edit?goods_id=${goods.goods_id}" class="btn btn-xs btn-info">修改</a> 
+                            <a href="/admin/goods/edit?goods_id=${goods.goods_id}" class="btn btn-xs btn-info">修改</a> 
                              <span class="btn btn-xs btn-danger spreadSubm" onclick="delGoods(${goods.goods_id})"><font>删除</font></span>
                             </td>
                         </tr>
@@ -76,16 +76,16 @@
                     </table>
                     <div class="list-page">
                     <#if pageInfo.isFirstPage == false>
-                    <a href="/goods/index?pageNum=${pageInfo.navigateFirstPage}&keywords=${keywords}&category_id=${category_id}">首页</a> 
+                    <a href="/admin/goods/index?pageNum=${pageInfo.navigateFirstPage}&keywords=${keywords}&category_id=${category_id}">首页</a> 
                     </#if>
                     <#if pageInfo.hasPreviousPage>
-                    <a href="/goods/index?pageNum=${pageInfo.prePage}&keywords=${keywords}&category_id=${category_id}">上一页</a> 
+                    <a href="/admin/goods/index?pageNum=${pageInfo.prePage}&keywords=${keywords}&category_id=${category_id}">上一页</a> 
                     </#if>
                     <#if pageInfo.hasNextPage>
-                    <a href="/goods/index?pageNum=${pageInfo.nextPage}&keywords=${keywords}&category_id=${category_id}">下一页</a>
+                    <a href="/admin/goods/index?pageNum=${pageInfo.nextPage}&keywords=${keywords}&category_id=${category_id}">下一页</a>
                     </#if>
                     <#if pageInfo.isLastPage == false>
-                    <a href="/goods/index?pageNum=${pageInfo.navigateLastPage}&keywords=${keywords}&category_id=${category_id}">尾页</a> 
+                    <a href="/admin/goods/index?pageNum=${pageInfo.navigateLastPage}&keywords=${keywords}&category_id=${category_id}">尾页</a> 
                     </#if>
                     共【${pageInfo.pages}】页，共计【${pageInfo.total}】条，每页【${pageInfo.pageSize}】条
 					</div>
@@ -115,7 +115,7 @@ function delGoods(id){
 	  if(confirm("你确定要删除吗？")){
 		  $.ajax({
 			  type:"POST",		  
-			  url:"/goods/del",
+			  url:"/admin/goods/del",
 			  data:{time:new Date(),goods_id:id},
 			  dataType:"json",
 			  cache:false,

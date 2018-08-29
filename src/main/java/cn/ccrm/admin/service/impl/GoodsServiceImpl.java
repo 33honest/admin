@@ -57,7 +57,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
 		try {
 			String pics = pm.getString("thumb");
-			int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
+			//int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			if (Tools.notEmpty(pics)) {
 				if(pics.indexOf("ta:image") > 0) {
 					pics = replaceBase64Before(pics);
@@ -71,7 +71,7 @@ public class GoodsServiceImpl implements IGoodsService {
 				}
 			}
 			String goodsId = pm.getString("goods_id");
-			pm.put("admin_id", userId);
+			//pm.put("admin_id", userId);
 			if(StringUtils.isNoneBlank(goodsId)) {
 				pm.put("update_time", DateUtil.getTime());
 				goodsDao.updateByPrimaryKeySelective(pm);

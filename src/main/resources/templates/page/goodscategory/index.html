@@ -12,8 +12,8 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/goodscategory/index"><i class="icon-font"></i>分类管理</a>
-                        <a href="/goodscategory/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
+                    	<a href="/admin/goodscategory/index"><i class="icon-font"></i>分类管理</a>
+                        <a href="/admin/goodscategory/edit"><i class="icon-font">&#xe008;</i>添加分类</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -29,7 +29,7 @@
                             <td class="tc"><input name="id[]" value="" type="checkbox"></td>
                             <td>${menu.categoryId}</td>
                             <td>${menu.categoryName}</td>
-                            <td><a href="/goodscategory/edit?menu_id=${menu.category_id}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.categoryId}"><font>展开</font></span>
+                            <td><a href="/admin/goodscategory/edit?menu_id=${menu.category_id}" class="btn btn-xs btn-info">修改</a> <span class="btn btn-xs btn-danger spreadSubm" data-id="${menu.categoryId}"><font>展开</font></span>
                              <span class="btn btn-xs btn-danger spreadSubm" onclick="delMenu(${menu.category_id})"><font>删除</font></span>
                             </td>
                         </tr>

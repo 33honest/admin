@@ -12,8 +12,8 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                    	<a href="/user/index"><i class="icon-font"></i>用户管理</a>
-                        <a href="/user/edit"><i class="icon-font">&#xe008;</i>添加用户</a>
+                    	<a href="/admin/user/index"><i class="icon-font"></i>用户管理</a>
+                        <a href="/admin/user/edit"><i class="icon-font">&#xe008;</i>添加用户</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -33,7 +33,7 @@
                             <td><span <#if user.status == "lock">style="color:red"</#if>>${user.username}</span></td>
                             <td>${user.nick_name}</td>
                             <td>${user.create_time}</td>
-                            <td><a href="/user/edit?user_id=${user.user_id}" class="btn btn-xs btn-info">修改</a> 
+                            <td><a href="/admin/user/edit?user_id=${user.user_id}" class="btn btn-xs btn-info">修改</a> 
                              <span class="btn btn-xs btn-danger spreadSubm" onclick="delUser(${user.user_id})"><font>删除</font></span>
                             </td>
                         </tr>
@@ -51,7 +51,7 @@ function delUser(id){
 	  if(confirm("你确定要删除吗？")){
 		  $.ajax({
 			  type:"POST",		  
-			  url:"/user/del",
+			  url:"/admin/user/del",
 			  data:{time:new Date(),user_id:id},
 			  dataType:"json",
 			  cache:false,

@@ -129,13 +129,13 @@ $("#goodsBtn").click(function(){
 	var isMarketable= $("input[name='is_marketable']:checked").val();
 	$.ajax({
 		type:"post",
-		url:"/goods/save",
+		url:"/admin/goods/save",
 		cache:false,
 		dataType:"json",
 		data:{category_id:categoryId,goods_name:goodsName,thumb:thumb,simple_describe:simpleDescribe,detail_describe:detailDescribe,is_marketable:isMarketable,retail_price:retailPrice,goods_id:goodsId},
 		success:function(data){
 			if(data.status == 'success'){
-				window.location.href="/goods/index";
+				window.location.href="/admin/goods/index";
 			}else{
 				alert(data.msg);
 			}

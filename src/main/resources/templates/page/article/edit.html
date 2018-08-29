@@ -116,13 +116,13 @@ $("#goodsBtn").click(function(){
 	//var isMarketable= $("input[name='is_marketable']:checked").val();
 	$.ajax({
 		type:"post",
-		url:"/article/save",
+		url:"/admin/article/save",
 		cache:false,
 		dataType:"json",
 		data:{category_id:categoryId,title:title,thumb:thumb,introduction:introduction,content:content,id:id},
 		success:function(data){
 			if(data.status == 'success'){
-				window.location.href="/article/index";
+				window.location.href="/admin/article/index";
 			}else{
 				alert(data.msg);
 			}

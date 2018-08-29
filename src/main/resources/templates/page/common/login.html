@@ -25,7 +25,7 @@ canvas {
 		<dt>
 			<strong>站点后台管理系统</strong> <em>Management System</em>
 		</dt>
-		<form name="loginForm" id="loginForm" method="POST" action="#">
+		<form name="loginForm" method="POST" action="#">
 			<dd class="user_icon">
 				<input type="text" placeholder="账号" name="username"
 					class="login_txtbx" />
@@ -58,20 +58,18 @@ canvas {
 					if (checkLogin()) {
 						$.ajax({
 							type : "POST",
-							url : "/login.do",
-							data : {
-								username : $("input[name='username']").val(),
-								password : $("input[name='password']").val(),
-								time : new Date().getTime()
-							},
-							dataType : "json",
+							url : "/login",
+							data: "username="+ $("input[name='username']").val() +"&password="+ $("input[name='password']").val(),
 							cache : false,
-							success : function(data) {
-								if ("success" == data.status) {
-									window.location.href = "/goods/index";
+							success : function(data, status) {
+								if ("success" == status) {
+									window.location.href = "/admin/goods/index";
 								} else {
-									alert(data.data);
+									alert(data.statusText);
 								}
+							},
+							error: function (data, status) {
+								alert(data.statusText);
 							}
 						})
 					}

@@ -56,7 +56,7 @@ public class UeditorController {
 		return projectPath;
 	}
 
-	@RequestMapping("/exec")
+	@RequestMapping("exec")
 	public void exec(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
 		response.setHeader("Content-Type", "text/html");
 		logger.info("rootPath->" + rootPath + ",staticPath->" + staticPath + ",projectPath->" + getProjectPath());

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import cn.ccrm.admin.dao.GoodsCategoryMapper;
@@ -79,9 +81,11 @@ public class GoodsCategoryServiceImpl implements IGoodsCategory{
 				newId = menuDao.getMaxIdByName();
 			} catch (Exception e) {}
 			
-			int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
+			UserDetails  userDetails  = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = userDetails.getUsername();
+			//int userId = ((User) session.getAttribute(Const.SESSION_USER)).getUserId();
 			pm.put("category_id", newId+1);
-			pm.put("admin_id", userId);
+			//pm.put("admin_id", 11);
 			pm.put("create_time", DateUtil.getTime());
 			pm.put("state", 1);
 			menuDao.insert(pm);
